@@ -1,0 +1,29 @@
+{
+  "name": "az-testing-workshop-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/az-testing-workshop-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/az-testing-workshop-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "az-testing-workshop:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "az-testing-workshop:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "az-testing-workshop:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["az-testing-workshop"]
+}
