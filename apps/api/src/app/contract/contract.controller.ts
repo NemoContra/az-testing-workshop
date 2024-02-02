@@ -1,12 +1,17 @@
-import { Body, Controller, Get, NotFoundException, Param, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Put,
+} from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
-import { Contract } from '../models/contract.model';
+import { Contract } from '@az-testing-workshop/shared/util/api-models';
 
 @Controller('contracts')
 export class ContractController {
-
-  constructor(private readonly databaseService: DatabaseService) {
-  }
+  constructor(private readonly databaseService: DatabaseService) {}
 
   @Get('')
   getAllContracts(): Promise<Contract[]> {
@@ -14,7 +19,9 @@ export class ContractController {
   }
 
   @Get(':id')
-  async getContractById(@Param('id') id: string): Promise<Contract | undefined> {
+  async getContractById(
+    @Param('id') id: string
+  ): Promise<Contract | undefined> {
     const contract = await this.databaseService.getContractById(id);
 
     if (!contract) {

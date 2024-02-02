@@ -4,7 +4,7 @@ export interface Contract {
   start: string;
   end?: string;
   premium: number;
-  person: Person
+  person: Person;
 }
 
 export interface Person {

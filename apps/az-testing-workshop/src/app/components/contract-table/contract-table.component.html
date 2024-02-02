@@ -1,0 +1,41 @@
+<nx-formfield>
+  <input
+    nxInput
+    type="text"
+    [ngModel]="query()"
+    (ngModelChange)="query.set($event)"
+  />
+  <span nxFormfieldPrefix>
+    <nx-icon name="search" size="s"></nx-icon>
+  </span>
+</nx-formfield>
+<div class="scroll-container">
+  <table nxTable class="nx-table--scrollable">
+    <thead>
+      <tr nxTableRow>
+        <th nxHeaderCell>Vertragsnummer</th>
+        <th nxHeaderCell>Vorname</th>
+        <th nxHeaderCell>Nachname</th>
+        <th nxHeaderCell>Geburtsdatum</th>
+        <th nxHeaderCell>Vertragsbeginn</th>
+        <th nxHeaderCell>Vertragsende</th>
+        <th nxHeaderCell>Aktion</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (contract of contracts; track contract.id) {
+      <tr>
+        <td nxTableCell>{{ contract.contractNumber }}</td>
+        <td nxTableCell>{{ contract.person.firstname }}</td>
+        <td nxTableCell>{{ contract.person.lastname }}</td>
+        <td nxTableCell>{{ contract.person.dateOfBirth | date }}</td>
+        <td nxTableCell>{{ contract.start | date }}</td>
+        <td nxTableCell>{{ contract.end ? (contract.end | date) : '-' }}</td>
+        <td nxTableCell [routerLink]="['/contract-details', contract.id]">
+          <nx-link>Details</nx-link>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

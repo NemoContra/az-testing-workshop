@@ -20,7 +20,12 @@
           "apps/az-testing-workshop/src/favicon.ico",
           "apps/az-testing-workshop/src/assets"
         ],
-        "styles": ["apps/az-testing-workshop/src/styles.scss"],
+        "styles": [
+          "apps/az-testing-workshop/src/styles.scss",
+          "node_modules/@aposin/ng-aquila/css/normalize.css",
+          "node_modules/@aposin/ng-aquila/themes/aposin.css",
+          "node_modules/@fortawesome/fontawesome-free/css/all.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -60,7 +65,17 @@
           "buildTarget": "az-testing-workshop:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "config/proxy-config.json"
+      }
+    },
+    "serve-app": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx serve api", "nx serve az-testing-workshop"],
+        "parallel": true
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

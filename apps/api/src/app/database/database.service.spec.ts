@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DatabaseService } from './database.service';
+import { Contract } from '@az-testing-workshop/shared/util/api-models';
 
 describe('DatabaseService', () => {
   let service: DatabaseService;
@@ -20,7 +21,9 @@ describe('DatabaseService', () => {
 
   describe('getContractById', () => {
     it('should return contract by id', async () => {
-      await expect(service.getContractById('123456789')).resolves.toMatchSnapshot();
+      await expect(
+        service.getContractById('123456789')
+      ).resolves.toMatchSnapshot();
     });
 
     it('should return undefined if id is not existing', async () => {
@@ -30,18 +33,29 @@ describe('DatabaseService', () => {
 
   describe('updateContract', () => {
     it('should return contract by id', async () => {
-      await expect(service.updateContract( {
-        id: '123456788',
-        person: { firstname: 'Bart', lastname: 'Stark', dateOfBirth: '1995-08-21' },
-      })).resolves.toMatchSnapshot();
+      await expect(
+        service.updateContract({
+          id: '123456788',
+          person: {
+            firstname: 'Bart',
+            lastname: 'Stark',
+            dateOfBirth: '1995-08-21',
+          },
+        } satisfies Partial<Contract>)
+      ).resolves.toMatchSnapshot();
     });
 
     it('should return undefined if contract to update is not found', async () => {
-      await expect(service.updateContract({
-        id: '123',
-        person: { firstname: 'Bart', lastname: 'Stark', dateOfBirth: '1995-08-21' },
-      })).resolves.toEqual(undefined);
+      await expect(
+        service.updateContract({
+          id: '123',
+          person: {
+            firstname: 'Bart',
+            lastname: 'Stark',
+            dateOfBirth: '1995-08-21',
+          },
+        } satisfies Partial<Contract>)
+      ).resolves.toEqual(undefined);
     });
   });
-
 });

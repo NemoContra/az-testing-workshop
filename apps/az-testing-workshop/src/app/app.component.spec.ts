@@ -1,27 +1,15 @@
-import { TestBed } from '@angular/core/testing';
+import { createComponentFactory } from '@ngneat/spectator/jest';
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { RouterOutlet } from '@angular/router';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent, NxWelcomeComponent, RouterTestingModule],
-    }).compileComponents();
+  const createComponent = createComponentFactory({
+    component: AppComponent,
+    imports: [RouterOutlet],
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome az-testing-workshop'
-    );
-  });
-
-  it(`should have as title 'az-testing-workshop'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('az-testing-workshop');
+  it('should render router-outlet', () => {
+    const spectator = createComponent();
+    expect(spectator.query(RouterOutlet)).toExist();
   });
 });

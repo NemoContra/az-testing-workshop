@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterOutlet],
   selector: 'az-testing-workshop-root',
-  templateUrl: './app.component.html',
+  standalone: true,
   styleUrl: './app.component.scss',
+  templateUrl: './app.component.html',
 })
-export class AppComponent {
-  title = 'az-testing-workshop';
-}
+export class AppComponent {}

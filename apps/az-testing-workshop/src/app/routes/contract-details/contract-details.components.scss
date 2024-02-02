@@ -1,0 +1,14 @@
+:host {
+  display: grid;
+  margin: 16px;
+}
+
+.spinner-outlet {
+  height: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+nx-link {
+  margin-bottom: 16px;
+}
