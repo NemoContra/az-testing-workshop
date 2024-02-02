@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContractController GET getAllContracts should return all contracts 1`] = `
+[
+  {
+    "contractNumber": "1/2345678/9",
+    "id": "123456789",
+    "person": {
+      "dateOfBirth": "1961-05-16",
+      "firstname": "Homer",
+      "lastname": "Simpson",
+    },
+    "premium": 42.42,
+    "start": "2024-01-01",
+  },
+]
+`;
+
+exports[`ContractController GET getContractById should return 404 not found 1`] = `
+{
+  "message": "Not Found",
+  "statusCode": 404,
+}
+`;
+
+exports[`ContractController GET getContractById should return contract by id 1`] = `
+{
+  "contractNumber": "1/2345678/9",
+  "id": "123456789",
+  "person": {
+    "dateOfBirth": "1961-05-16",
+    "firstname": "Homer",
+    "lastname": "Simpson",
+  },
+  "premium": 42.42,
+  "start": "2024-01-01",
+}
+`;
+
+exports[`ContractController PUT updateContract should return 404 not found 1`] = `
+{
+  "message": "Not Found",
+  "statusCode": 404,
+}
+`;
+
+exports[`ContractController PUT updateContract should update a contract and return the new one 1`] = `
+{
+  "contractNumber": "1/2345678/9",
+  "id": "123456789",
+  "person": {
+    "dateOfBirth": "1961-05-16",
+    "firstname": "Homer",
+    "lastname": "Stark",
+  },
+  "premium": 5000,
+  "start": "2024-01-01",
+}
+`;

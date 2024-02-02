@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatabaseService getAllContracts should return all contracts 1`] = `
+[
+  {
+    "contractNumber": "1/2345678/9",
+    "id": "123456789",
+    "person": {
+      "dateOfBirth": "1961-05-16",
+      "firstname": "Homer",
+      "lastname": "Simpson",
+    },
+    "premium": 42.42,
+    "start": "2024-01-01",
+  },
+  {
+    "contractNumber": "1/2345678/8",
+    "id": "123456788",
+    "person": {
+      "dateOfBirth": "1995-08-21",
+      "firstname": "Bart",
+      "lastname": "Simpson",
+    },
+    "premium": 99,
+    "start": "2024-02-01",
+  },
+]
+`;
+
+exports[`DatabaseService getContractById should return contract by id 1`] = `
+{
+  "contractNumber": "1/2345678/9",
+  "id": "123456789",
+  "person": {
+    "dateOfBirth": "1961-05-16",
+    "firstname": "Homer",
+    "lastname": "Simpson",
+  },
+  "premium": 42.42,
+  "start": "2024-01-01",
+}
+`;
+
+exports[`DatabaseService updateContract should return contract by id 1`] = `
+{
+  "contractNumber": "1/2345678/8",
+  "id": "123456788",
+  "person": {
+    "dateOfBirth": "1995-08-21",
+    "firstname": "Bart",
+    "lastname": "Stark",
+  },
+  "premium": 99,
+  "start": "2024-02-01",
+}
+`;
