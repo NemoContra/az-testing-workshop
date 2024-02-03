@@ -28,8 +28,8 @@ export class DatabaseService {
     },
   ];
 
-  public getAllContracts(): Promise<Contract[]> {
-    return Promise.resolve(this.mockData);
+  public getAllContracts(searchQuery?: string): Promise<Contract[]> {
+    return Promise.resolve(this.mockData.filter(contract => contract.person.firstname.includes(searchQuery) || contract.person.lastname.includes(searchQuery)));
   }
 
   public getContractById(contractId: string): Promise<Contract | undefined> {
@@ -37,10 +37,10 @@ export class DatabaseService {
   }
 
   public updateContract(
-    updatedContract: Partial<Contract>
+     updatedContract: Partial<Contract>,
   ): Promise<Contract | undefined> {
     const existingContract = this.mockData.find(
-      ({ id }) => id === updatedContract.id
+       ({ id }) => id === updatedContract.id,
     );
 
     if (!existingContract) {
@@ -48,7 +48,7 @@ export class DatabaseService {
     }
 
     const updatedContracts = this.mockData.filter(
-      ({ id }) => id !== updatedContract.id
+       ({ id }) => id !== updatedContract.id,
     );
 
     this.mockData = [

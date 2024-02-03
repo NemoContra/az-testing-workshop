@@ -4,7 +4,7 @@ import {
   Get,
   NotFoundException,
   Param,
-  Put,
+  Put, Query,
 } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';
@@ -14,8 +14,8 @@ export class ContractController {
   constructor(private readonly databaseService: DatabaseService) {}
 
   @Get('')
-  getAllContracts(): Promise<Contract[]> {
-    return this.databaseService.getAllContracts();
+  getAllContracts(@Query('query') searchQuery?: string): Promise<Contract[]> {
+    return this.databaseService.getAllContracts(searchQuery);
   }
 
   @Get(':id')

@@ -30,6 +30,7 @@
     "rxjs": "~7.8.0",
     "supertest": "6.3.4",
     "tslib": "^2.3.0",
+    "zod": "3.22.4",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
