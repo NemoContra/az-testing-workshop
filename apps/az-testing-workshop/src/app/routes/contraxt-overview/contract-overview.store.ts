@@ -36,7 +36,7 @@ export const ContractOverviewStore = signalStore(
         debounceTime(300),
         distinctUntilChanged(),
         tap(() => patchState(store, { loading: true })),
-        switchMap((query) =>
+        switchMap((query = store.query()) =>
           httpClient
             .get<Contract[]>(
               '/api/contracts',

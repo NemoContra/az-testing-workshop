@@ -1,14 +1,14 @@
-@if(store.errorCode()) {
+@if(overviewStore.errorCode()) {
 <nx-error>An error occurred</nx-error>
 }
 <div class="spinner-outlet">
-  @if(store.loading()) {
+  @if(overviewStore.loading()) {
   <nx-spinner size="medium" />
   }
 </div>
-@if (store.contracts(); as contracts) {
+@if (overviewStore.contracts(); as contracts) {
 <contract-table
   [contracts]="contracts"
-  (queryChange)="store.setQuery($event)"
+  (queryChange)="overviewStore.setQuery($event)"
 />
 }

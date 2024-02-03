@@ -13,5 +13,5 @@ import { NxErrorModule } from '@aposin/ng-aquila/base';
   templateUrl: './contract-overview.component.html',
 })
 export default class ContractOverviewComponent {
-  store = inject(ContractOverviewStore);
+  overviewStore = inject(ContractOverviewStore);
 }

@@ -23,6 +23,8 @@ import {
 } from '../../common/transaction-type';
 import { DatePipe } from '@angular/common';
 import { NxMessageToastService } from '@aposin/ng-aquila/message';
+import { ContractOverviewStore } from '../contraxt-overview/contract-overview.store';
+import { ContractDisplayComponent } from '../../components/contract-display/contract-display.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,6 +40,7 @@ import { NxMessageToastService } from '@aposin/ng-aquila/message';
     NxButtonModule,
     FormsModule,
     DatePipe,
+    ContractDisplayComponent,
   ],
   providers: [ContractTransactionStore],
   selector: 'contract-transaction',
@@ -57,6 +60,7 @@ export default class ContractTransactionComponent {
   }
 
   store = inject(ContractTransactionStore);
+  overviewStore = inject(ContractOverviewStore);
   readonly transactionTypes = transactionTypes;
 
   private router = inject(Router);
@@ -73,6 +77,7 @@ export default class ContractTransactionComponent {
     { person, ...contract }: Contract
   ): void {
     this.store.updateContract({ ...contract, person: { ...person, lastname } });
+    this.overviewStore.loadContractOverview();
     this.messageToastService.open(
       'Änderung des Nachname erfolgreich durchgeführt',
       {
@@ -84,6 +89,7 @@ export default class ContractTransactionComponent {
 
   submitKuendigung(contract: Contract): void {
     this.store.updateContract({ ...contract, end: new Date().toDateString() });
+    this.overviewStore.loadContractOverview();
     this.messageToastService.open('Kündigung erfolgreich durchgeführt', {
       context: 'success',
       duration: 5000,

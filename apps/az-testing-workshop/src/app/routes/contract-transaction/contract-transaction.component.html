@@ -9,6 +9,7 @@
 </div>
 @if(store.contract(); as contract) {
 <div class="content">
+  <contract-display [contract]="contract" />
   <div>
     <nx-formfield label="Transaktion wählen">
       <nx-dropdown

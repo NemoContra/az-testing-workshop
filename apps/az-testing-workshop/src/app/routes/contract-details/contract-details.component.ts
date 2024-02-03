@@ -12,6 +12,7 @@ import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { RouterLink } from '@angular/router';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
+import { ContractDisplayComponent } from '../../components/contract-display/contract-display.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +24,7 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
     NxLinkModule,
     RouterLink,
     NxIconModule,
+    ContractDisplayComponent,
   ],
   providers: [ContractDetailsStore],
   selector: 'contract-details',
