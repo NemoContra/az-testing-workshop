@@ -7,12 +7,12 @@ export const appRoutes: Route[] = [
       import('./routes/contraxt-overview/contract-overview.component'),
   },
   {
-    path: 'contract-details/:id',
+    path: 'details/:id',
     loadComponent: () =>
       import('./routes/contract-details/contract-details.component'),
   },
   {
-    path: 'contract-transaction/:id',
+    path: 'transaktion/:id',
     loadComponent: () =>
       import('./routes/contract-transaction/contract-transaction.component'),
   },

@@ -1,10 +1,10 @@
-:host {
-  display: grid;
-  margin: 16px;
-}
-
 .spinner-outlet {
   height: 20px;
   display: flex;
   justify-content: flex-end;
+}
+
+contract-table {
+  display: block;
+  margin: 36px;
 }

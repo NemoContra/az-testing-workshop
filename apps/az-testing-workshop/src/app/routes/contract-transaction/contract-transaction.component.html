@@ -1,0 +1,55 @@
+<nx-link routerLink="/"><nx-icon name="chevron-left" />Zurück</nx-link>
+@if(store.errorCode()) {
+<nx-error>An error occurred</nx-error>
+}
+<div class="spinner-outlet">
+  @if(store.loading()) {
+  <nx-spinner size="medium" />
+  }
+</div>
+@if(store.contract(); as contract) {
+<div class="content">
+  <div>
+    <nx-formfield label="Transaktion wählen">
+      <nx-dropdown
+        [value]="store.transactionType()"
+        (valueChange)="selectTransactionType($event)"
+      >
+        @for(transaktionType of transactionTypes; track transaktionType) {
+        <nx-dropdown-item [value]="transaktionType">{{
+          transaktionType | transactionType
+        }}</nx-dropdown-item>
+        }
+      </nx-dropdown>
+    </nx-formfield>
+  </div>
+  <div>
+    @switch (store.transactionType();) { @case ('AenderungNachname') {
+    <form (submit)="submitAenderungNachname(nachname.value, contract)">
+      <nx-formfield label="Nachname">
+        <input
+          nxInput
+          type="text"
+          #nachname
+          [value]="contract.person.lastname"
+        />
+      </nx-formfield>
+      <button nxButton type="submit">Absenden</button>
+    </form>
+    } @case ('Kuendigung') {
+    <form (submit)="submitKuendigung(contract)">
+      <button [disabled]="!!contract.end" nxButton type="submit">
+        Kündigen
+      </button>
+      @if(contract.end) {
+      <nx-error class="cancel-error"
+        >Der Vertrag wurde bereits zum
+        {{ contract.end | date }} gekündigt</nx-error
+      >
+      }
+    </form>
+    } }
+  </div>
+</div>
+
+}

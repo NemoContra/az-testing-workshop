@@ -11,6 +11,7 @@ import { NxErrorModule } from '@aposin/ng-aquila/base';
 import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { RouterLink } from '@angular/router';
+import { NxIconModule } from '@aposin/ng-aquila/icon';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +22,7 @@ import { RouterLink } from '@angular/router';
     NxSpinnerModule,
     NxLinkModule,
     RouterLink,
+    NxIconModule,
   ],
   providers: [ContractDetailsStore],
   selector: 'contract-details',

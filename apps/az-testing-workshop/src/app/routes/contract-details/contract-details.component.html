@@ -1,31 +1,33 @@
-@if(store.errorCode()) {
-<nx-error>An error occurred</nx-error>
-}
-<div class="spinner-outlet">
-  @if(store.loading()) {
-  <nx-spinner size="medium" />
+<nx-link routerLink="/"><nx-icon name="chevron-left" />Zurück</nx-link>
+<div>
+  @if(store.errorCode()) {
+  <nx-error>An error occurred</nx-error>
+  }
+  <div class="spinner-outlet">
+    @if(store.loading()) {
+    <nx-spinner size="medium" />
+    }
+  </div>
+  @if(store.contract(); as contract) {
+  <div class="content two-col-grid">
+    <nx-data-display label="Vertragsnummer">{{
+      contract.contractNumber
+    }}</nx-data-display>
+    <nx-data-display label="Vertragsbeginn">{{
+      contract.start | date
+    }}</nx-data-display>
+    <nx-data-display label="Vertragsende">{{
+      contract.end ? (contract.end | date) : '-'
+    }}</nx-data-display>
+    <nx-data-display label="Vorname">{{
+      contract.person.firstname
+    }}</nx-data-display>
+    <nx-data-display label="Nachname">{{
+      contract.person.lastname
+    }}</nx-data-display>
+    <nx-data-display label="Geburtsdatum">{{
+      contract.person.dateOfBirth | date
+    }}</nx-data-display>
+  </div>
   }
 </div>
-@if(store.contract(); as contract) {
-<div>
-  <nx-link routerLink="/">Zurück</nx-link>
-  <nx-data-display label="Vertragsnummer">{{
-    contract.contractNumber
-  }}</nx-data-display>
-  <nx-data-display label="Vertragsbeginn">{{
-    contract.start | date
-  }}</nx-data-display>
-  <nx-data-display label="Vertragsende">{{
-    contract.end ? (contract.end | date) : '-'
-  }}</nx-data-display>
-  <nx-data-display label="Vorname">{{
-    contract.person.firstname
-  }}</nx-data-display>
-  <nx-data-display label="Nachname">{{
-    contract.person.lastname
-  }}</nx-data-display>
-  <nx-data-display label="Geburtsdatum">{{
-    contract.person.dateOfBirth | date
-  }}</nx-data-display>
-</div>
-}

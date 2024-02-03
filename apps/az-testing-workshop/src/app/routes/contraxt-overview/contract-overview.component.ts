@@ -7,7 +7,6 @@ import { NxErrorModule } from '@aposin/ng-aquila/base';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ContractTableComponent, NxSpinnerModule, NxErrorModule],
-  providers: [ContractOverviewStore],
   selector: 'contraxt-overview',
   standalone: true,
   styleUrl: './contract-overview.component.scss',

@@ -16,17 +16,18 @@ export type ContractOverviewState = {
   contracts: Contract[] | undefined;
   errorCode: number | undefined;
   loading: boolean;
-  query: string | undefined;
+  query: string;
 };
 
 export const initialContractOverviewState: ContractOverviewState = {
   contracts: undefined,
   errorCode: undefined,
   loading: false,
-  query: undefined,
+  query: '',
 };
 
 export const ContractOverviewStore = signalStore(
+  { providedIn: 'root' },
   withState(initialContractOverviewState),
   withMethods((store, httpClient = inject(HttpClient)) => ({
     setQuery: (query: string) => patchState(store, { query }),

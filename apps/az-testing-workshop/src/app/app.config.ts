@@ -12,6 +12,7 @@ import { appRoutes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { NxExpertModule } from '@aposin/ng-aquila/config';
 import { NxDocumentationIconModule } from '@aposin/ng-aquila/documentation-icons';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
       withEnabledBlockingInitialNavigation()
     ),
     provideHttpClient(),
+    provideAnimationsAsync(),
     importProvidersFrom(NxExpertModule, NxDocumentationIconModule),
     { provide: LOCALE_ID, useValue: 'de-DE' },
   ],

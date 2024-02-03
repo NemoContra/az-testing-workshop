@@ -1,3 +1,11 @@
+@use '@angular/cdk/a11y-prebuilt.css';
+
+html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   background: #0f2a3d;
 }
