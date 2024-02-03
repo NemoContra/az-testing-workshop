@@ -7,8 +7,5 @@
   }
 </div>
 @if (overviewStore.contracts(); as contracts) {
-<contract-table
-  [contracts]="contracts"
-  (queryChange)="overviewStore.setQuery($event)"
-/>
+<contract-table [contracts]="contracts" (queryChange)="setQuery($event)" />
 }

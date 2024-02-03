@@ -15,6 +15,7 @@
       <nx-dropdown
         [value]="store.transactionType()"
         (valueChange)="selectTransactionType($event)"
+        placeholder="Bitte wählen"
       >
         @for(transaktionType of transactionTypes; track transaktionType) {
         <nx-dropdown-item [value]="transaktionType">{{

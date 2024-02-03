@@ -9,8 +9,9 @@ import { Contract } from '@az-testing-workshop/shared/util/api-models';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { debounceTime, distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
 import { inject } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { tapResponse } from '@ngrx/operators';
+import { ContractService } from '../../services/contract.service';
 
 export type ContractOverviewState = {
   contracts: Contract[] | undefined;
@@ -29,32 +30,27 @@ export const initialContractOverviewState: ContractOverviewState = {
 export const ContractOverviewStore = signalStore(
   { providedIn: 'root' },
   withState(initialContractOverviewState),
-  withMethods((store, httpClient = inject(HttpClient)) => ({
+  withMethods((store, contractService = inject(ContractService)) => ({
     setQuery: (query: string) => patchState(store, { query }),
-    loadContractOverview: rxMethod<string | void>(
+    getContracts: rxMethod<string>(
       pipe(
         debounceTime(300),
         distinctUntilChanged(),
         tap(() => patchState(store, { loading: true })),
-        switchMap((query = store.query()) =>
-          httpClient
-            .get<Contract[]>(
-              '/api/contracts',
-              query ? { params: { query } } : undefined
-            )
-            .pipe(
-              tapResponse({
-                next: (contracts) => patchState(store, { contracts }),
-                error: ({ status }: HttpErrorResponse) =>
-                  patchState(store, { errorCode: status }),
-                finalize: () => patchState(store, { loading: false }),
-              })
-            )
+        switchMap((query) =>
+          contractService.getContracts(query).pipe(
+            tapResponse({
+              next: (contracts) => patchState(store, { contracts }),
+              error: ({ status }: HttpErrorResponse) =>
+                patchState(store, { errorCode: status }),
+              finalize: () => patchState(store, { loading: false }),
+            })
+          )
         )
       )
     ),
   })),
-  withHooks(({ loadContractOverview, query }) => ({
-    onInit: () => loadContractOverview(query),
+  withHooks(({ getContracts, query }) => ({
+    onInit: () => getContracts(query),
   }))
 );
