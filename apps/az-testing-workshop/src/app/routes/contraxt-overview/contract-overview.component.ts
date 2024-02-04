@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ContractTableComponent, NxSpinnerModule, NxErrorModule],
-  selector: 'contraxt-overview',
+  selector: 'contract-overview',
   standalone: true,
   styleUrl: './contract-overview.component.scss',
   templateUrl: './contract-overview.component.html',
