@@ -3,9 +3,6 @@
 exports[`ContractOverview should render contracts-table 1`] = `
 <lib-ngneat-host-component>
   <contract-overview>
-    <nx-error>
-      An error occurred
-    </nx-error>
     <div
       class="spinner-outlet"
     >

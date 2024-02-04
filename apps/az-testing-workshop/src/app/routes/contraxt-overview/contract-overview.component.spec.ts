@@ -1,4 +1,4 @@
-import { createHostFactory, mockProvider } from '@ngneat/spectator/jest';
+import { createHostFactory } from '@ngneat/spectator/jest';
 import ContractOverviewComponent from './contract-overview.component';
 import { Router } from '@angular/router';
 import { ContractTableComponent } from '../../components/contract-table/contract-table.components';
@@ -10,19 +10,30 @@ import { MockComponent, MockModule } from 'ng-mocks';
 import { NxErrorModule } from '@aposin/ng-aquila/base';
 import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
 
+const createContractOverviewStoreMock = () => ({
+  errorCode: signal<number | undefined>(undefined),
+  loading: signal(false),
+  contracts: signal<Contract[] | undefined>(undefined),
+  setQuery: jest.fn(),
+});
+
 describe('ContractOverview', () => {
-  const contractOverviewStoreMock = {
-    errorCode: signal(false),
-    loading: signal(false),
-    contracts: signal<Contract[] | undefined>(undefined),
-    setQuery: jest.fn(),
-  };
+  let contractOverviewStoreMock: ReturnType<
+    typeof createContractOverviewStoreMock
+  >;
 
   const createComponent = createHostFactory({
     component: ContractOverviewComponent,
     providers: [
-      mockProvider(Router, { navigate: jest.fn().mockResolvedValue(true) }),
-      mockProvider(ContractOverviewStore, contractOverviewStoreMock),
+      {
+        provide: Router,
+        useFactory: () => ({ navigate: jest.fn().mockResolvedValue(true) }),
+      },
+      {
+        provide: ContractOverviewStore,
+        useFactory: () =>
+          (contractOverviewStoreMock = createContractOverviewStoreMock()),
+      },
     ],
     overrideComponents: [
       [
@@ -43,24 +54,25 @@ describe('ContractOverview', () => {
     ],
   });
 
-  afterEach(() => jest.clearAllMocks());
-
   it('should render loading-spinner', () => {
-    contractOverviewStoreMock.loading.set(true);
     const spectator = createComponent('<contract-overview />');
+    contractOverviewStoreMock.loading.set(true);
+    spectator.detectChanges();
     expect(spectator.fixture).toMatchSnapshot();
   });
 
   it('should render error message', () => {
-    contractOverviewStoreMock.loading.set(false);
-    contractOverviewStoreMock.errorCode.set(true);
     const spectator = createComponent('<contract-overview />');
+    contractOverviewStoreMock.errorCode.set(500);
+    contractOverviewStoreMock.loading.set(false);
+    spectator.detectChanges();
     expect(spectator.fixture).toMatchSnapshot();
   });
 
   it('should render contracts-table', () => {
-    contractOverviewStoreMock.contracts.set(mockContracts);
     const spectator = createComponent('<contract-overview />');
+    contractOverviewStoreMock.contracts.set(mockContracts);
+    spectator.detectChanges();
     expect(spectator.fixture).toMatchSnapshot();
     expect(spectator.query(ContractTableComponent)?.contracts).toEqual(
       mockContracts
@@ -68,8 +80,9 @@ describe('ContractOverview', () => {
   });
 
   it('should trigger routing when search is used', () => {
-    contractOverviewStoreMock.contracts.set(mockContracts);
     const spectator = createComponent('<contract-overview />');
+    contractOverviewStoreMock.contracts.set(mockContracts);
+    spectator.detectChanges();
     const router = spectator.inject(Router);
     spectator.triggerEventHandler('contract-table', 'queryChange', 'Bart');
     expect(router.navigate).toHaveBeenCalledTimes(1);
@@ -81,12 +94,13 @@ describe('ContractOverview', () => {
   });
 
   it('should set the queryParam from router', () => {
-    contractOverviewStoreMock.contracts.set(mockContracts);
     const spectator = createComponent('<contract-overview />', {
       props: {
         query: 'Bart',
       },
     });
+    contractOverviewStoreMock.contracts.set(mockContracts);
+    spectator.detectChanges();
     expect(contractOverviewStoreMock.setQuery).toHaveBeenCalledTimes(1);
     expect(contractOverviewStoreMock.setQuery).toHaveBeenCalledWith('Bart');
     spectator.setInput({ query: 'Simpson' });
