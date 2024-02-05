@@ -1,4 +1,4 @@
-import { createHostFactory } from '@ngneat/spectator/jest';
+import { createComponentFactory } from '@ngneat/spectator/jest';
 import ContractOverviewComponent from './contract-overview.component';
 import { Router } from '@angular/router';
 import { ContractTableComponent } from '../../components/contract-table/contract-table.components';
@@ -22,7 +22,7 @@ describe('ContractOverview', () => {
     typeof createContractOverviewStoreMock
   >;
 
-  const createComponent = createHostFactory({
+  const createComponent = createComponentFactory({
     component: ContractOverviewComponent,
     providers: [
       {
@@ -55,14 +55,14 @@ describe('ContractOverview', () => {
   });
 
   it('should render loading-spinner', () => {
-    const spectator = createComponent('<contract-overview />');
+    const spectator = createComponent();
     contractOverviewStoreMock.loading.set(true);
     spectator.detectChanges();
     expect(spectator.fixture).toMatchSnapshot();
   });
 
   it('should render error message', () => {
-    const spectator = createComponent('<contract-overview />');
+    const spectator = createComponent();
     contractOverviewStoreMock.errorCode.set(500);
     contractOverviewStoreMock.loading.set(false);
     spectator.detectChanges();
@@ -70,7 +70,7 @@ describe('ContractOverview', () => {
   });
 
   it('should render contracts-table', () => {
-    const spectator = createComponent('<contract-overview />');
+    const spectator = createComponent();
     contractOverviewStoreMock.contracts.set(mockContracts);
     spectator.detectChanges();
     expect(spectator.fixture).toMatchSnapshot();
@@ -80,7 +80,7 @@ describe('ContractOverview', () => {
   });
 
   it('should trigger routing when search is used', () => {
-    const spectator = createComponent('<contract-overview />');
+    const spectator = createComponent();
     contractOverviewStoreMock.contracts.set(mockContracts);
     spectator.detectChanges();
     const router = spectator.inject(Router);
@@ -94,7 +94,7 @@ describe('ContractOverview', () => {
   });
 
   it('should set the queryParam from router', () => {
-    const spectator = createComponent('<contract-overview />', {
+    const spectator = createComponent({
       props: {
         query: 'Bart',
       },

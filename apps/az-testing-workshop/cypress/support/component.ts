@@ -1,5 +1,6 @@
+import { mount } from 'cypress/angular';
 // ***********************************************************
-// This example support/e2e.ts is processed and
+// This example support/component.ts is processed and
 // loaded automatically before your test files.
 //
 // This is a great place to put global configuration and
@@ -15,3 +16,17 @@
 
 // Import commands.ts using ES2015 syntax:
 import './commands';
+import 'cypress-map/commands/map';
+
+// add component testing only related command here, such as mount
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    interface Chainable<Subject> {
+      mount: typeof mount;
+    }
+  }
+}
+
+Cypress.Commands.add('mount', mount);

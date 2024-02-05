@@ -7,7 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { TransactionsType } from '../../common/transaction-type';
 import { ContractService } from '../../services/contract.service';
-import { ContractOverviewStore } from '../contraxt-overview/contract-overview.store';
+import { ContractOverviewStore } from '../contract-overview/contract-overview.store';
 
 export type ContractTransactionState = {
   contract: Contract | undefined;

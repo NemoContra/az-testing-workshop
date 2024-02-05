@@ -5304,6 +5304,13 @@ cssstyle@^2.3.0:
   dependencies:
     cssom "~0.3.6"
 
+cypress-map@1.30.0:
+  version "1.30.0"
+  resolved "https://registry.yarnpkg.com/cypress-map/-/cypress-map-1.30.0.tgz#d83ce7be9708493d5d3e79cfe081b7812b0077fe"
+  integrity sha512-VYSfA4F1Qxa4xxyJS2HHVsKCEmosXiOhnXqRvXbpYsIKcgQAeXEnOcdPYYNzcRNbmtk3XidUAtx3PQxzz9+uig==
+  dependencies:
+    string-format "^2.0.0"
+
 cypress@^13.0.0:
   version "13.6.4"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-13.6.4.tgz#42c88d3ee0342f1681abfacabf9c1f082676bc53"
@@ -10473,6 +10480,11 @@ streamsearch@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/streamsearch/-/streamsearch-1.1.0.tgz#404dd1e2247ca94af554e841a8ef0eaa238da764"
   integrity sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==
+
+string-format@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/string-format/-/string-format-2.0.0.tgz#f2df2e7097440d3b65de31b6d40d54c96eaffb9b"
+  integrity sha512-bbEs3scLeYNXLecRRuk6uJxdXUSj6le/8rNPHChIJTn2V79aXVTR1EH2OH5zLKKoz0V02fOUKZZcw01pLUShZA==
 
 string-length@^4.0.1:
   version "4.0.2"
