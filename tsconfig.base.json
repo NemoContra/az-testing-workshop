@@ -17,6 +17,9 @@
     "paths": {
       "@az-testing-workshop/shared/util/api-models": [
         "libs/shared/util/api-models/src/index.ts"
+      ],
+      "@az-testing-workshop/test-helpers": [
+        "libs/shared/util/test-helpers/src/index.ts"
       ]
     }
   },

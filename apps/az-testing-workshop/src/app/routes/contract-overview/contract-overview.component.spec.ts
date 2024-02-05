@@ -5,10 +5,10 @@ import { ContractTableComponent } from '../../components/contract-table/contract
 import { ContractOverviewStore } from './contract-overview.store';
 import { signal } from '@angular/core';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';
-import { mockContracts } from '../../test-helpers/mock-contracts';
 import { MockComponent, MockModule } from 'ng-mocks';
 import { NxErrorModule } from '@aposin/ng-aquila/base';
 import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
+import { mockContracts } from '@az-testing-workshop/test-helpers';
 
 const createContractOverviewStoreMock = () => ({
   errorCode: signal<number | undefined>(undefined),
