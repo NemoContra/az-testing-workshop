@@ -22,6 +22,6 @@
 - service test --> FT
 - signalStore test --> MH
 - contract-details impliziter store test und component-test --> MH
-- contract-display --> MH
+- contract-display --> MH fertig
 - contract-transaction expliziter store test--> FT
 - transaction-pipe --> FT
