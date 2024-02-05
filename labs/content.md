@@ -1,3 +1,5 @@
+## Topics
+
 - inputs
 - outputs
 - pipes (test.each)
@@ -14,14 +16,15 @@
 - e2e-test
 - jest useFakeTimers
 
---> fehlende Tests:
+## Missing Tests
 
-- component test --> MH
-- contract-table --> MH
-- e2e --> MH
-- service test --> FT
-- signalStore test --> MH
-- contract-details impliziter store test und component-test --> MH
-- contract-display --> MH
-- contract-transaction expliziter store test--> FT
-- transaction-pipe --> FT
+- [ ] MH: component test
+- [ ] MH: contract-table
+- [ ] MH: e2e
+- [x] FT: service test
+- [ ] MH: signalStore test
+- [ ] MH: contract-details implicit store unit-test
+- [ ] MH: contract-details implicit store component-test
+- [ ] MH: contract-display
+- [ ] FT: contract-transaction explicit store test
+- [ ] FT: transaction-pipe
