@@ -5,15 +5,23 @@ import { NxExpertModule } from '@aposin/ng-aquila/config';
 
 import { ContractTableComponent } from './contract-table.components';
 import { MountConfig } from 'cypress/angular';
+import { expectCorrectTableRow } from '../../../../cypress/support/helpers.po';
+import { provideRouter } from '@angular/router';
+import { LOCALE_ID } from '@angular/core';
+import { DummyRouterDestinationComponent, mockContracts } from '../../../../../../libs/shared/util/test-helpers/src';
 
 registerLocaleData(localeDE);
 
 describe(ContractTableComponent.name, () => {
   const mountConfig: MountConfig<ContractTableComponent> = {
     imports: [
-      NxExpertModule
+      NxExpertModule,
+      DummyRouterDestinationComponent
     ],
-    providers: [provideNoopAnimations()]
+    providers: [provideNoopAnimations(), provideRouter([{
+      path: 'details/:id',
+      component: DummyRouterDestinationComponent
+    }]), { provide: LOCALE_ID, useValue: 'de-DE' }]
   };
 
   beforeEach(() => {
@@ -21,20 +29,60 @@ describe(ContractTableComponent.name, () => {
   });
 
 
-  it('should add all available contracts and sort the rows correctly', () => {
-    cy.mount(ContractTableComponent, mountConfig);
+  it('should show the correct contracts which are provided as input value', () => {
+    cy.mount(ContractTableComponent, { ...mountConfig, componentProperties: { contracts: mockContracts } });
 
-    cy.get('div.scroll-container').should('be.visible');
+    cy.get('div.scroll-container table[nxTable]').should('be.visible');
 
-    /*expectCorrectTableRow(0, 'error_outline', 'Inkasso', 'FIAB', 'AL-8090913400');
-    expectCorrectTableRow(1, 'error_outline', 'Inkasso', 'Beurkundungssperre', 'AL-8090921155');
-    expectCorrectTableRow(2, 'error_outline', 'Baecidfogh', 'Stefan', '5/413733/22');
-    expectCorrectTableRow(3, 'error_outline', 'Baecid', 'Halgard', '000000000865');
-    expectCorrectTableRow(4, 'error_outline', 'Baecid', 'Angelika', '6/169099/1904');
-    expectCorrectTableRow(5, 'error_outline', 'Baecdif', 'Stefan', '5/413733/27');
-    expectCorrectTableRow(6, 'error_outline', 'Baecd', 'Stephan', '6/169099/1905');
-    expectCorrectTableRow(7, 'error_outline', 'Baec', 'Wolf-Rüdiger', '6/169099/162');
-    expectCorrectTableRow(8, 'error_outline', 'Baec', 'Jochen', '6/169099/1930');
-    expectCorrectTableRow(9, 'error_outline', 'Bacedfig', 'Marga', '6/169099/1919');*/
+    cy.get('table thead tr th').should('have.length', 7);
+    cy.get('table thead tr th').eq(0).should('have.text', 'Vertragsnummer');
+    cy.get('table thead tr th').eq(1).should('have.text', 'Vorname');
+    cy.get('table thead tr th').eq(2).should('have.text', 'Nachname');
+    cy.get('table thead tr th').eq(3).should('have.text', 'Geburtsdatum');
+    cy.get('table thead tr th').eq(4).should('have.text', 'Vertragsbeginn');
+    cy.get('table thead tr th').eq(5).should('have.text', 'Vertragsende');
+    cy.get('table thead tr th').eq(6).should('have.text', 'Aktion');
+
+    cy.get('table tbody tr').should('have.length', 2);
+    cy.get('table tbody tr').eq(0).find('td').should('have.length', 7);
+    cy.get('table tbody tr').eq(1).find('td').should('have.length', 7);
+
+    expectCorrectTableRow(0, '1/2345678/9', 'Homer', 'Simpson', '16.05.1961', '01.01.2024', '');
+    expectCorrectTableRow(1, '1/2345678/8', 'Bart', 'Simpson', '21.08.1995', '01.02.2024', '');
+  });
+
+  it('should have a context-menu with the correct entries', () => {
+    cy.mount(ContractTableComponent, { ...mountConfig, componentProperties: { contracts: mockContracts } });
+
+    cy.get('nx-context-menu').should('not.be.visible');
+
+    cy.get('table tbody tr').eq(0).find('td').eq(6).find('button').click();
+
+    cy.get('div.nx-context-menu').should('be.visible');
+    cy.get('div.nx-context-menu button').should('have.length', 4);
+
+    cy.get('div.nx-context-menu button').eq(0).should('contain.text', 'Details anzeigen');
+    cy.get('div.nx-context-menu button').eq(0).should('have.attr', 'type', 'button');
+    cy.get('div.nx-context-menu button').eq(0).should('have.attr', 'nxContextMenuItem');
+
+    cy.get('div.nx-context-menu button').eq(0).click();
+
+    cy.url().should('contain', 'details/123456788');
+  });
+
+  it('should show an empty table hint if no contracts are provided', () => {
+    cy.mount(ContractTableComponent, { ...mountConfig, componentProperties: { contracts: [] } });
+
+    cy.get('table tbody tr td').should('have.length', 1);
+    cy.get('table tbody tr td').should('have.text', 'Keine Verträge vorhanden.')
+  });
+
+  it('should emit the correct output event when searching for a contract', () => {
+    cy.mount(ContractTableComponent, { ...mountConfig, componentProperties: { contracts: [] }, autoSpyOutputs: true });
+
+    cy.get('nx-formfield input').type('Homer');
+
+    cy.get('@queryChange').should('have.been.calledOnce');
+    cy.get('@queryChange').should('have.been.calledWith', 'Homer');
   });
 });

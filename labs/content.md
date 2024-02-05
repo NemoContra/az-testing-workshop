@@ -25,6 +25,6 @@
 - [ ] MH: signalStore test
 - [ ] MH: contract-details implicit store unit-test
 - [ ] MH: contract-details implicit store component-test
-- [ ] MH: contract-display
+- [x] MH: contract-display
 - [ ] FT: contract-transaction explicit store test
 - [ ] FT: transaction-pipe
