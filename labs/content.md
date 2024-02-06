@@ -18,13 +18,13 @@
 
 ## Missing Tests
 
-- [ ] MH: component test
-- [ ] MH: contract-table
+- [-] MH: component test
+- [-] MH: contract-table
 - [ ] MH: e2e
 - [x] FT: service test
-- [ ] MH: signalStore test
-- [ ] MH: contract-details implicit store unit-test
-- [ ] MH: contract-details implicit store component-test
+- [x] MH: signalStore test
+- [x] MH: contract-details implicit store unit-test
+- [x] MH: contract-details implicit store component-test
 - [x] MH: contract-display
 - [ ] FT: contract-transaction explicit store test
 - [ ] FT: transaction-pipe

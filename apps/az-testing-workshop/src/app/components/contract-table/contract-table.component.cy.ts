@@ -8,7 +8,7 @@ import { MountConfig } from 'cypress/angular';
 import { expectCorrectTableRow } from '../../../../cypress/support/helpers.po';
 import { provideRouter } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
-import { DummyRouterDestinationComponent, mockContracts } from '../../../../../../libs/shared/util/test-helpers/src';
+import { DummyRouterDestinationComponent, mockContracts } from '@az-testing-workshop/test-helpers';
 
 registerLocaleData(localeDE);
 
