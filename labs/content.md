@@ -27,4 +27,4 @@
 - [x] MH: contract-details implicit store component-test
 - [x] MH: contract-display
 - [ ] FT: contract-transaction explicit store test
-- [ ] FT: transaction-pipe
+- [x] FT: transaction-pipe
