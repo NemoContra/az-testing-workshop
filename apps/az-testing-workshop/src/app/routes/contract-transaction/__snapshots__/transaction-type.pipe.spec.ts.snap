@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransactionTypePipe should render the transactionType for AenderungNachname 1`] = `
+<lib-ngneat-host-component>
+  <span>
+    Änderung des Nachnamen
+  </span>
+</lib-ngneat-host-component>
+`;
+
+exports[`TransactionTypePipe should render the transactionType for Kuendigung 1`] = `
+<lib-ngneat-host-component>
+  <span>
+    Vertragskündigung
+  </span>
+</lib-ngneat-host-component>
+`;
+
+exports[`TransactionTypePipe should transform AenderungNachname 1`] = `
+<lib-ngneat-host-component>
+  <span>
+    Änderung des Nachnamen
+  </span>
+</lib-ngneat-host-component>
+`;
+
+exports[`TransactionTypePipe should transform Kuendigung 1`] = `
+<lib-ngneat-host-component>
+  <span>
+    Vertragskündigung
+  </span>
+</lib-ngneat-host-component>
+`;
