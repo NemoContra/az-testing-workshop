@@ -1,10 +1,13 @@
+import { mockContracts } from '@az-testing-workshop/test-helpers';
+
 describe('AzTestingWorkshop', () => {
   beforeEach(() => {
-    cy.intercept('/api/contracts', [])
+    cy.intercept('/api/contracts', mockContracts)
     cy.visit('/');
   });
 
-  it('should display the app', () => {
+  it('should display the app with the table', () => {
     cy.get('contract-table').should('be.visible');
+    cy.get('contract-table input').should('be.visible');
   });
 });
