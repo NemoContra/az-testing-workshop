@@ -8,7 +8,6 @@ import { MockModule } from 'ng-mocks';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { LOCALE_ID } from '@angular/core';
-import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 
 registerLocaleData(localeDe);
 
@@ -31,7 +30,7 @@ describe('ContractDisplayComponent', () => {
   it('should show the correct fields of a provided contract', () => {
     const spectator = createComponent({
       props: {
-        contract:   {
+        contract: {
           id: '123456789',
           contractNumber: '1/2345678/9',
           start: '2024-01-01',

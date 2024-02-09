@@ -30,7 +30,7 @@ export const ContractTransactionStore = signalStore(
     (
       store,
       contractService = inject(ContractService),
-      { contracts, ...contractOverviewStore } = inject(ContractOverviewStore)
+      contractOverviewStore = inject(ContractOverviewStore)
     ) => ({
       selectTransaction: (transactionType: TransactionsType) =>
         patchState(store, { transactionType }),
@@ -58,7 +58,10 @@ export const ContractTransactionStore = signalStore(
                 next: (contract) => {
                   patchState(store, { contract });
                   patchState(contractOverviewStore, {
-                    contracts: optimisticUpdateContracts(contracts(), contract),
+                    contracts: optimisticUpdateContracts(
+                      contractOverviewStore.contracts(),
+                      contract
+                    ),
                   });
                 },
                 error: ({ status }: HttpErrorResponse) =>
