@@ -8,6 +8,7 @@ import { inject } from '@angular/core';
 import { TransactionsType } from '../../common/transaction-type';
 import { ContractService } from '../../services/contract.service';
 import { ContractOverviewStore } from '../contract-overview/contract-overview.store';
+import { optimisticUpdateContracts } from '../../common/optimistic-update-contracts';
 
 export type ContractTransactionState = {
   contract: Contract | undefined;
@@ -22,14 +23,6 @@ export const initialContractTransactionState: ContractTransactionState = {
   loading: false,
   transactionType: undefined,
 };
-
-const optimisticUpdateContracts = (
-  contracts: Contract[] | undefined,
-  updatedContract: Contract
-) =>
-  contracts?.map((contract) =>
-    contract.id === updatedContract.id ? updatedContract : contract
-  );
 
 export const ContractTransactionStore = signalStore(
   withState(initialContractTransactionState),
