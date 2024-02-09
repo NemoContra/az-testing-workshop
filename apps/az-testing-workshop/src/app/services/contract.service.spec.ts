@@ -8,11 +8,9 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import {
-  createSpyObserver,
-  mockContracts,
-} from '@az-testing-workshop/test-helpers';
+import { createSpyObserver } from '@az-testing-workshop/shared/util/test-helpers';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
+import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 
 describe('ContractService', () => {
   let spectator: SpectatorService<ContractService>;

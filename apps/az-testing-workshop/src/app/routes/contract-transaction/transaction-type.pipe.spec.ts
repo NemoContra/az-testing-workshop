@@ -6,24 +6,21 @@ describe('TransactionTypePipe', () => {
   const createPipe = createPipeFactory(TransactionTypePipe);
 
   /**
-   * We can test pipes using spectator with real template and rendering
+   * We can test pipes with `createPipeFactory` from spectator
    */
-  it.each([
-    {
-      transactionType: 'AenderungNachname' satisfies TransactionsType,
-    },
-    {
-      transactionType: 'Kuendigung' satisfies TransactionsType,
-    },
-  ])(
-    'should render the transactionType for $transactionType',
-    ({ transactionType }) => {
-      const spectator = createPipe(
-        `<span>{{ '${transactionType}' | transactionType }}</span>`
-      );
-      expect(spectator.fixture).toMatchSnapshot();
-    }
-  );
+  it('should render the transactionType for "AenderungNachname"', () => {
+    const spectator = createPipe(
+      `<span>{{ 'AenderungNachname' | transactionType }}</span>`
+    );
+    expect(spectator.fixture).toMatchSnapshot();
+  });
+
+  it('should render the transactionType for "Kuendigung"', () => {
+    const spectator = createPipe(
+      `<span>{{ 'Kuendigung' | transactionType }}</span>`
+    );
+    expect(spectator.fixture).toMatchSnapshot();
+  });
 
   /**
    * We can test pipes by creating an instance manually and calling the transform method

@@ -1,8 +1,8 @@
-import { mockContracts } from '@az-testing-workshop/test-helpers';
+import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 
 describe('AzTestingWorkshop', () => {
   beforeEach(() => {
-    cy.intercept('/api/contracts', mockContracts)
+    cy.intercept('/api/contracts', mockContracts);
     cy.visit('/');
   });
 

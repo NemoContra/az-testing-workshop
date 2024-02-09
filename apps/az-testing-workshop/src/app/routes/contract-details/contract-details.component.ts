@@ -38,8 +38,4 @@ export default class ContractDetailsComponent {
   }
 
   store: ContractDetailsStore = inject(ContractDetailsStore);
-
-  log() {
-    console.log('TEST');
-  }
 }

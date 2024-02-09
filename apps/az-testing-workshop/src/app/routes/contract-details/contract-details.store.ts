@@ -16,7 +16,7 @@ export type ContractDetailsState = {
 export const initialContractDetailsState: ContractDetailsState = {
   contract: undefined,
   errorCode: undefined,
-  loading: false
+  loading: false,
 };
 
 export const ContractDetailsStore = signalStore(
@@ -31,12 +31,12 @@ export const ContractDetailsStore = signalStore(
               next: (contract) => patchState(store, { contract }),
               error: ({ status }: HttpErrorResponse) =>
                 patchState(store, { errorCode: status }),
-              finalize: () => patchState(store, { loading: false })
-            }),
+              finalize: () => patchState(store, { loading: false }),
+            })
           )
         )
       )
-    )
+    ),
   }))
 );
 

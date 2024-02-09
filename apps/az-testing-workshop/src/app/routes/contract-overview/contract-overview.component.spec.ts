@@ -8,7 +8,7 @@ import { Contract } from '@az-testing-workshop/shared/util/api-models';
 import { MockComponent, MockModule } from 'ng-mocks';
 import { NxErrorModule } from '@aposin/ng-aquila/base';
 import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
-import { mockContracts } from '@az-testing-workshop/test-helpers';
+import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 
 const createContractOverviewStoreMock = () => ({
   errorCode: signal<number | undefined>(undefined),

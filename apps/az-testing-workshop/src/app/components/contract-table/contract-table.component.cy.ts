@@ -8,29 +8,35 @@ import { MountConfig } from 'cypress/angular';
 import { expectCorrectTableRow } from '../../../../cypress/support/helpers.po';
 import { provideRouter } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
-import { DummyRouterDestinationComponent, mockContracts } from '@az-testing-workshop/test-helpers';
+import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
+import { DummyRouterDestinationComponent } from '@az-testing-workshop/shared/util/test-helpers';
 
 registerLocaleData(localeDE);
 
 describe(ContractTableComponent.name, () => {
   const mountConfig: MountConfig<ContractTableComponent> = {
-    imports: [
-      NxExpertModule,
-      DummyRouterDestinationComponent
+    imports: [NxExpertModule, DummyRouterDestinationComponent],
+    providers: [
+      provideNoopAnimations(),
+      provideRouter([
+        {
+          path: 'details/:id',
+          component: DummyRouterDestinationComponent,
+        },
+      ]),
+      { provide: LOCALE_ID, useValue: 'de-DE' },
     ],
-    providers: [provideNoopAnimations(), provideRouter([{
-      path: 'details/:id',
-      component: DummyRouterDestinationComponent
-    }]), { provide: LOCALE_ID, useValue: 'de-DE' }]
   };
 
   beforeEach(() => {
     cy.viewport(1600, 800);
   });
 
-
   it('should show the correct contracts which are provided as input value', () => {
-    cy.mount(ContractTableComponent, { ...mountConfig, componentProperties: { contracts: mockContracts } });
+    cy.mount(ContractTableComponent, {
+      ...mountConfig,
+      componentProperties: { contracts: mockContracts },
+    });
 
     cy.get('div.scroll-container table[nxTable]').should('be.visible');
 
@@ -47,12 +53,31 @@ describe(ContractTableComponent.name, () => {
     cy.get('table tbody tr').eq(0).find('td').should('have.length', 7);
     cy.get('table tbody tr').eq(1).find('td').should('have.length', 7);
 
-    expectCorrectTableRow(0, '1/2345678/9', 'Homer', 'Simpson', '16.05.1961', '01.01.2024', '');
-    expectCorrectTableRow(1, '1/2345678/8', 'Bart', 'Simpson', '21.08.1995', '01.02.2024', '');
+    expectCorrectTableRow(
+      0,
+      '1/2345678/9',
+      'Homer',
+      'Simpson',
+      '16.05.1961',
+      '01.01.2024',
+      ''
+    );
+    expectCorrectTableRow(
+      1,
+      '1/2345678/8',
+      'Bart',
+      'Simpson',
+      '21.08.1995',
+      '01.02.2024',
+      ''
+    );
   });
 
   it('should have a context-menu with the correct entries', () => {
-    cy.mount(ContractTableComponent, { ...mountConfig, componentProperties: { contracts: mockContracts } });
+    cy.mount(ContractTableComponent, {
+      ...mountConfig,
+      componentProperties: { contracts: mockContracts },
+    });
 
     cy.get('nx-context-menu').should('not.be.visible');
 
@@ -61,9 +86,15 @@ describe(ContractTableComponent.name, () => {
     cy.get('div.nx-context-menu').should('be.visible');
     cy.get('div.nx-context-menu button').should('have.length', 4);
 
-    cy.get('div.nx-context-menu button').eq(0).should('contain.text', 'Details anzeigen');
-    cy.get('div.nx-context-menu button').eq(0).should('have.attr', 'type', 'button');
-    cy.get('div.nx-context-menu button').eq(0).should('have.attr', 'nxContextMenuItem');
+    cy.get('div.nx-context-menu button')
+      .eq(0)
+      .should('contain.text', 'Details anzeigen');
+    cy.get('div.nx-context-menu button')
+      .eq(0)
+      .should('have.attr', 'type', 'button');
+    cy.get('div.nx-context-menu button')
+      .eq(0)
+      .should('have.attr', 'nxContextMenuItem');
 
     cy.get('div.nx-context-menu button').eq(0).click();
 
@@ -71,14 +102,24 @@ describe(ContractTableComponent.name, () => {
   });
 
   it('should show an empty table hint if no contracts are provided', () => {
-    cy.mount(ContractTableComponent, { ...mountConfig, componentProperties: { contracts: [] } });
+    cy.mount(ContractTableComponent, {
+      ...mountConfig,
+      componentProperties: { contracts: [] },
+    });
 
     cy.get('table tbody tr td').should('have.length', 1);
-    cy.get('table tbody tr td').should('have.text', 'Keine Verträge vorhanden.')
+    cy.get('table tbody tr td').should(
+      'have.text',
+      'Keine Verträge vorhanden.'
+    );
   });
 
   it('should emit the correct output event when searching for a contract', () => {
-    cy.mount(ContractTableComponent, { ...mountConfig, componentProperties: { contracts: [] }, autoSpyOutputs: true });
+    cy.mount(ContractTableComponent, {
+      ...mountConfig,
+      componentProperties: { contracts: [] },
+      autoSpyOutputs: true,
+    });
 
     cy.get('nx-formfield input').type('Homer');
 

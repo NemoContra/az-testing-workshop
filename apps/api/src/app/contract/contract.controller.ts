@@ -4,7 +4,8 @@ import {
   Get,
   NotFoundException,
   Param,
-  Put, Query,
+  Put,
+  Query,
 } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';

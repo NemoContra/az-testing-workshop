@@ -1,43 +1,38 @@
 import { createComponentFactory } from '@ngneat/spectator/jest';
 import { ContractDisplayComponent } from './contract-display.component';
-import { NxDataDisplayComponent, NxDataDisplayModule } from '@aposin/ng-aquila/data-display';
+import {
+  NxDataDisplayComponent,
+  NxDataDisplayModule,
+} from '@aposin/ng-aquila/data-display';
 import { MockModule } from 'ng-mocks';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { LOCALE_ID } from '@angular/core';
+import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 
 registerLocaleData(localeDe);
 
 describe('ContractDisplayComponent', () => {
-  const createComponent = createComponentFactory(
-    {
-      component: ContractDisplayComponent,
-      providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
-      overrideComponents: [
-        [ContractDisplayComponent, {
+  const createComponent = createComponentFactory({
+    component: ContractDisplayComponent,
+    providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
+    overrideComponents: [
+      [
+        ContractDisplayComponent,
+        {
           remove: { imports: [NxDataDisplayModule] },
-          add: { imports: [MockModule(NxDataDisplayModule)] }
-        }]
+          add: { imports: [MockModule(NxDataDisplayModule)] },
+        },
       ],
-      detectChanges: false
-    }
-  );
+    ],
+    detectChanges: false,
+  });
 
   it('should show the correct fields of a provided contract', () => {
     const spectator = createComponent({
       props: {
-        contract: {
-          id: '123456789',
-          contractNumber: '1/2345678/9',
-          start: '2024-01-01',
-          premium: 42.42,
-          person: {
-            firstname: 'Homer',
-            lastname: 'Simpson',
-            dateOfBirth: '1961-05-16'
-          }
-        }
-      }
+        contract: mockContracts[0],
+      },
     });
 
     spectator.detectChanges();
