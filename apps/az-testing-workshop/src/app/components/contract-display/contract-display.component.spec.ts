@@ -31,7 +31,18 @@ describe('ContractDisplayComponent', () => {
   it('should show the correct fields of a provided contract', () => {
     const spectator = createComponent({
       props: {
-        contract: mockContracts[0],
+        contract:   {
+          id: '123456789',
+          contractNumber: '1/2345678/9',
+          start: '2024-01-01',
+          end: '2056-01-31',
+          premium: 42.42,
+          person: {
+            firstname: 'Homer',
+            lastname: 'Simpson',
+            dateOfBirth: '1961-05-16',
+          },
+        },
       },
     });
 
@@ -74,5 +85,9 @@ describe('ContractDisplayComponent', () => {
     spectator.detectChanges();
 
     expect(spectator.fixture).toMatchSnapshot();
+
+    const dataDisplays = spectator.queryAll(NxDataDisplayComponent);
+
+    expect(dataDisplays.length).toEqual(0);
   });
 });
