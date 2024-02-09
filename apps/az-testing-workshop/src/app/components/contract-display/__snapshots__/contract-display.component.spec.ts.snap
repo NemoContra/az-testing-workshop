@@ -10,32 +10,32 @@ exports[`ContractDisplayComponent should show the correct fields of a provided c
     <nx-data-display
       label="Vertragsnummer"
     >
-      1/2345678/9
+      1/2345678/9 
     </nx-data-display>
     <nx-data-display
       label="Vertragsbeginn"
     >
-      01.01.2024
+      01.01.2024 
     </nx-data-display>
     <nx-data-display
       label="Vertragsende"
     >
-      -
+      31.01.2056 
     </nx-data-display>
     <nx-data-display
       label="Vorname"
     >
-      Homer
+      Homer 
     </nx-data-display>
     <nx-data-display
       label="Nachname"
     >
-      Simpson
+      Simpson 
     </nx-data-display>
     <nx-data-display
       label="Geburtsdatum"
     >
-      16.05.1961
+      16.05.1961 
     </nx-data-display>
   </div>
 </contract-display>
@@ -48,31 +48,6 @@ exports[`ContractDisplayComponent should show the fields of an empty contract if
   <div
     class="two-col-grid"
   >
-    <nx-data-display
-      label="Vertragsnummer"
-    >
-    </nx-data-display>
-    <nx-data-display
-      label="Vertragsbeginn"
-    >
-    </nx-data-display>
-    <nx-data-display
-      label="Vertragsende"
-    >
-      -
-    </nx-data-display>
-    <nx-data-display
-      label="Vorname"
-    >
-    </nx-data-display>
-    <nx-data-display
-      label="Nachname"
-    >
-    </nx-data-display>
-    <nx-data-display
-      label="Geburtsdatum"
-    >
-    </nx-data-display>
   </div>
 </contract-display>
 `;
