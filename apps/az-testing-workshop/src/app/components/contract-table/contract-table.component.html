@@ -23,11 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      @if (contracts?.length === 0) {
-      <tr>
-        <td colspan="7">Keine Verträge vorhanden.</td>
-      </tr>
-      } @for (contract of contracts; track contract.id) {
+      @for (contract of contracts; track contract.id) {
       <tr>
         <td nxTableCell>{{ contract.contractNumber }}</td>
         <td nxTableCell>{{ contract.person.firstname }}</td>
@@ -78,7 +74,11 @@
           </button>
         </td>
       </tr>
-      }
+      } @empty {
+          <tr>
+              <td colspan="7">Keine Verträge vorhanden.</td>
+          </tr>
+    }
     </tbody>
   </table>
 </div>

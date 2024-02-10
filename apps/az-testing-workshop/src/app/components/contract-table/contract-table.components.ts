@@ -18,6 +18,7 @@ import { NxMenuModule } from '@aposin/ng-aquila/menu';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxContextMenuModule } from '@aposin/ng-aquila/context-menu';
 import { transactionQueryParam } from '../../common/transaction-type';
+import { debounceTime, skip, tap } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,7 +41,7 @@ import { transactionQueryParam } from '../../common/transaction-type';
 export class ContractTableComponent {
   @Input({ required: true }) contracts?: Contract[];
   query = signal('');
-  @Output() queryChange = toObservable(this.query);
+  @Output('queryChange') queryChange = toObservable(this.query).pipe(skip(1), debounceTime(201));
 
   aenderungNachnameQueryParams = transactionQueryParam('AenderungNachname');
   kuendigungQueryParams = transactionQueryParam('Kuendigung');

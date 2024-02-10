@@ -4,10 +4,6 @@
 
 This repository contains two application inside the `apps directory`. An Angular app (az-testing-workshop) and a a Nest.js app which acts as a mock-backend. For this workshop we wil focus on the Angular app only.
 
-### API endpoint to search for flights (GET request)
-
-In this part of the lab you will implement your first Controller method to provide flights for the FlightApp frontend.
-
 1. Check out the branch `start`.
 
   ```console
@@ -22,4 +18,10 @@ In this part of the lab you will implement your first Controller method to provi
 
 1. Now open the `contract-display.component.spec.ts` and implement the already created empty tests.
 
-1. When you are finished execute the unit tests with `nx test az-testing-workshop -t contract-display` or use your IDE to execute the tests.
+1. When you are finished execute the unit tests with `nx test az-testing-workshop -t ContractDisplayComponent` or use your IDE to execute the tests.
+
+1. If you are searching for an example solution checkout the branch `final`.
+
+  ```console
+    git checkout final
+  ```
