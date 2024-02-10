@@ -27,7 +27,7 @@ describe(ContractDetailsComponent.name, () => {
   };
 
   beforeEach(() => {
-    // cy.viewport(1600, 800);
+    cy.viewport(1600, 800);
   });
 
   it.only('should render content with contract-display component if http call is returning data successfully', () => {
@@ -58,7 +58,7 @@ describe(ContractDetailsComponent.name, () => {
 
   it('should show an error if htpp call is returning an error ', () => {
     cy.intercept('/api/contracts/123456789', { statusCode: 500 }).as(
-      'contract'
+       'contract',
     );
 
     cy.mount(ContractDetailsComponent, {

@@ -4,23 +4,24 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { NxExpertModule } from '@aposin/ng-aquila/config';
 
 import { ContractTableComponent } from './contract-table.components';
-import { MountConfig } from 'cypress/angular';
+import { createOutputSpy, MountConfig } from 'cypress/angular';
 import { expectCorrectTableRow } from '../../../../cypress/support/helpers.po';
 import { provideRouter } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
 import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 import { DummyRouterDestinationComponent } from '@az-testing-workshop/shared/util/test-helpers';
+import { ComponentFixture } from '@angular/core/testing';
 
 registerLocaleData(localeDE);
 
 describe(ContractTableComponent.name, () => {
   const mountConfig: MountConfig<ContractTableComponent> = {
-    imports: [NxExpertModule, DummyRouterDestinationComponent],
+    imports: [NxExpertModule, ContractTableComponent, DummyRouterDestinationComponent],
     providers: [
       provideNoopAnimations(),
       provideRouter([
         {
-          path: 'details/:id',
+          path: '**',
           component: DummyRouterDestinationComponent,
         },
       ]),
@@ -54,22 +55,22 @@ describe(ContractTableComponent.name, () => {
     cy.get('table tbody tr').eq(1).find('td').should('have.length', 7);
 
     expectCorrectTableRow(
-      0,
-      '1/2345678/9',
-      'Homer',
-      'Simpson',
-      '16.05.1961',
-      '01.01.2024',
-      ''
+       0,
+       '1/2345678/9',
+       'Homer',
+       'Simpson',
+       '16.05.1961',
+       '01.01.2024',
+       '',
     );
     expectCorrectTableRow(
-      1,
-      '1/2345678/8',
-      'Bart',
-      'Simpson',
-      '21.08.1995',
-      '01.02.2024',
-      ''
+       1,
+       '1/2345678/8',
+       'Bart',
+       'Simpson',
+       '21.08.1995',
+       '01.02.2024',
+       '',
     );
   });
 
@@ -87,18 +88,45 @@ describe(ContractTableComponent.name, () => {
     cy.get('div.nx-context-menu button').should('have.length', 4);
 
     cy.get('div.nx-context-menu button')
-      .eq(0)
-      .should('contain.text', 'Details anzeigen');
+       .eq(0)
+       .should('contain.text', 'Details anzeigen');
     cy.get('div.nx-context-menu button')
-      .eq(0)
-      .should('have.attr', 'type', 'button');
+       .eq(0)
+       .should('have.attr', 'type', 'button');
     cy.get('div.nx-context-menu button')
-      .eq(0)
-      .should('have.attr', 'nxContextMenuItem');
+       .eq(0)
+       .should('have.attr', 'nxContextMenuItem');
 
-    cy.get('div.nx-context-menu button').eq(0).click();
+    cy.get('div.nx-context-menu button')
+       .eq(1)
+       .should('contain.text', 'Transaktion durchführen');
+    cy.get('div.nx-context-menu button')
+       .eq(1)
+       .should('have.attr', 'type', 'button');
+    cy.get('div.nx-context-menu button')
+       .eq(1)
+       .should('have.attr', 'nxContextMenuItem');
 
-    cy.url().should('contain', 'details/123456788');
+    cy.get('div.nx-context-menu button')
+       .eq(2)
+       .should('contain.text', 'Nachname ändern');
+    cy.get('div.nx-context-menu button')
+       .eq(2)
+       .should('have.attr', 'type', 'button');
+    cy.get('div.nx-context-menu button')
+       .eq(2)
+       .should('have.attr', 'nxContextMenuItem');
+
+    cy.get('div.nx-context-menu button')
+       .eq(3)
+       .should('contain.text', 'Kündigung');
+    cy.get('div.nx-context-menu button')
+       .eq(3)
+       .should('have.attr', 'type', 'button');
+    cy.get('div.nx-context-menu button')
+       .eq(3)
+       .should('have.attr', 'nxContextMenuItem');
+    // TODO: Test navigation
   });
 
   it('should show an empty table hint if no contracts are provided', () => {
@@ -109,21 +137,24 @@ describe(ContractTableComponent.name, () => {
 
     cy.get('table tbody tr td').should('have.length', 1);
     cy.get('table tbody tr td').should(
-      'have.text',
-      'Keine Verträge vorhanden.'
+       'have.text',
+       'Keine Verträge vorhanden.',
     );
   });
 
-  it('should emit the correct output event when searching for a contract', () => {
-    cy.mount(ContractTableComponent, {
+  it('should emit the correct output event when searching for a contract', async () => {
+    let fixture: ComponentFixture<ContractTableComponent>;
+
+    cy.mount<ContractTableComponent>('<contract-table [contracts]="contracts" (queryChange)="queryChange.emit($event)"></contract-table>', {
       ...mountConfig,
-      componentProperties: { contracts: [] },
-      autoSpyOutputs: true,
+      componentProperties: { contracts: mockContracts, queryChange: createOutputSpy<string>('queryChangeSpy')},
+    }).then(component => {
+      fixture = component.fixture;
     });
 
     cy.get('nx-formfield input').type('Homer');
 
-    cy.get('@queryChange').should('have.been.calledOnce');
-    cy.get('@queryChange').should('have.been.calledWith', 'Homer');
+    cy.get('@queryChangeSpy').should('have.been.calledOnce');
+    cy.get('@queryChangeSpy').should('have.been.calledWith', 'Homer');
   });
 });
