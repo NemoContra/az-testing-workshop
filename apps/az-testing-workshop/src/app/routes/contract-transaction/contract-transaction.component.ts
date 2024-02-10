@@ -23,15 +23,15 @@ import {
 import { DatePipe } from '@angular/common';
 import { NxMessageToastService } from '@aposin/ng-aquila/message';
 import { ContractDisplayComponent } from '../../components/contract-display/contract-display.component';
-import { NxErrorModule } from '@aposin/ng-aquila/base';
+import { getNowDateString } from '../../common/get-now-date-string';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    TransactionTypePipe,
+    ContractDisplayComponent,
     NxDropdownModule,
     NxInputModule,
-    NxErrorModule,
-    TransactionTypePipe,
     NxIconModule,
     NxLinkModule,
     RouterLink,
@@ -39,7 +39,6 @@ import { NxErrorModule } from '@aposin/ng-aquila/base';
     NxButtonModule,
     FormsModule,
     DatePipe,
-    ContractDisplayComponent,
   ],
   providers: [ContractTransactionStore],
   selector: 'contract-transaction',
@@ -85,7 +84,7 @@ export default class ContractTransactionComponent {
   }
 
   submitKuendigung(contract: Contract): void {
-    this.store.updateContract({ ...contract, end: new Date().toISOString() });
+    this.store.updateContract({ ...contract, end: getNowDateString() });
     this.messageToastService.open('Kündigung erfolgreich durchgeführt', {
       context: 'success',
       duration: 5000,

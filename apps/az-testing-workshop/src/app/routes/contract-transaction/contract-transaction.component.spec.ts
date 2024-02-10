@@ -2,7 +2,6 @@ import { createRoutingFactory } from '@ngneat/spectator/jest';
 import ContractTransactionComponent from './contract-transaction.component';
 import { ContractTransactionStore } from './contract-transaction.store';
 import { NxMessageToastService } from '@aposin/ng-aquila/message';
-import { of } from 'rxjs';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { MockComponent, MockModule } from 'ng-mocks';
 import { signal } from '@angular/core';
@@ -13,6 +12,22 @@ import { ContractDisplayComponent } from '../../components/contract-display/cont
 import { NxDropdownHarness } from '@az-testing-workshop/shared/util/test-harnesses';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Router } from '@angular/router';
+import { NxErrorModule } from '@aposin/ng-aquila/base';
+import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
+import { mockComponent } from '@az-testing-workshop/shared/util/test-helpers';
+
+jest.mock('@aposin/ng-aquila/message', () => ({
+  ...jest.requireActual('@aposin/ng-aquila/message'),
+  NxMessageToastService: class _NxMessageToastService {
+    open = jest.fn(() => ({
+      afterDismissed: jest.fn(() => jest.requireActual('rxjs').of(null)),
+    }));
+  },
+}));
+
+jest.mock('../../common/get-now-date-string', () => ({
+  getNowDateString: jest.fn(() => '2024-01-01'),
+}));
 
 const createState = () => ({
   getContract: jest.fn(),
@@ -36,16 +51,14 @@ describe('ContractTransactionComponent', () => {
       },
     ],
     providers: [
-      {
-        provide: NxMessageToastService,
-        useFactory: () => ({
-          open: jest.fn(() => ({ afterDismissed: jest.fn(() => of(null)) })),
-        }),
-      },
+      NxMessageToastService,
       {
         provide: ContractTransactionStore,
         useFactory: () => (store = createState()),
       },
+    ],
+    overrideModules: [
+      [NxFormfieldModule, { remove: { exports: [NxErrorModule] } }],
     ],
     overrideComponents: [
       [
@@ -59,16 +72,13 @@ describe('ContractTransactionComponent', () => {
             imports: [
               MockModule(NxIconModule),
               MockComponent(ContractDisplayComponent),
+              mockComponent({ selector: 'nx-error' }),
             ],
           },
         },
       ],
     ],
     stubsEnabled: false,
-  });
-
-  beforeAll(() => {
-    jest.setSystemTime(new Date('2024-01-01'));
   });
 
   it('should render in loading store', () => {
@@ -174,6 +184,7 @@ describe('ContractTransactionComponent', () => {
 
   it('should submit transactionType "Änderung des Nachnamen"', async () => {
     const spectator = createComponent();
+    const nxMessageToastService = spectator.inject(NxMessageToastService);
 
     store.loading.set(false);
     store.contract.set(mockContracts[0]);
@@ -196,7 +207,6 @@ describe('ContractTransactionComponent', () => {
       start: '2024-01-01',
     });
 
-    const nxMessageToastService = spectator.inject(NxMessageToastService);
     expect(nxMessageToastService.open).toHaveBeenCalledTimes(1);
     expect(nxMessageToastService.open).toHaveBeenCalledWith(
       'Änderung des Nachname erfolgreich durchgeführt',
@@ -213,6 +223,7 @@ describe('ContractTransactionComponent', () => {
         id: '123456789',
       },
     });
+    const nxMessageToastService = spectator.inject(NxMessageToastService);
 
     store.loading.set(false);
     store.contract.set(mockContracts[0]);
@@ -232,10 +243,9 @@ describe('ContractTransactionComponent', () => {
       },
       premium: 42.42,
       start: '2024-01-01',
-      end: '2024-02-09T16:56:33.410Z',
+      end: '2024-01-01',
     });
 
-    const nxMessageToastService = spectator.inject(NxMessageToastService);
     expect(nxMessageToastService.open).toHaveBeenCalledTimes(1);
     expect(nxMessageToastService.open).toHaveBeenCalledWith(
       'Kündigung erfolgreich durchgeführt',
@@ -250,12 +260,12 @@ describe('ContractTransactionComponent', () => {
     const spectator = createComponent();
 
     store.loading.set(false);
-    store.contract.set({ ...mockContracts[0], end: '2024-01-02' });
+    store.contract.set({ ...mockContracts[0], end: '2024-01-01' });
     store.transactionType.set('Kuendigung');
     spectator.detectChanges();
 
     expect(spectator.query('nx-error.cancel-error')?.innerHTML).toContain(
-      'Der Vertrag wurde bereits zum Jan 2, 2024 gekündigt'
+      'Der Vertrag wurde bereits zum Jan 1, 2024 gekündigt'
     );
   });
 });
