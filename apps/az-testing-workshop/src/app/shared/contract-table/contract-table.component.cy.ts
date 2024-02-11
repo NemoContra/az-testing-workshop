@@ -9,23 +9,19 @@ import { expectCorrectTableRow } from '../../../../cypress/support/helpers.po';
 import { provideRouter } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
 import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
-import { DummyRouterDestinationComponent } from '@az-testing-workshop/shared/util/test-helpers';
+import { mockComponent } from '@az-testing-workshop/shared/util/test-helpers';
 
 registerLocaleData(localeDE);
 
 describe(ContractTableComponent.name, () => {
   const mountConfig: MountConfig<ContractTableComponent> = {
-    imports: [
-      NxExpertModule,
-      ContractTableComponent,
-      DummyRouterDestinationComponent,
-    ],
+    imports: [NxExpertModule, ContractTableComponent],
     providers: [
       provideNoopAnimations(),
       provideRouter([
         {
           path: '**',
-          component: DummyRouterDestinationComponent,
+          component: mockComponent({ selector: 'routing-dummy' }),
         },
       ]),
       { provide: LOCALE_ID, useValue: 'de-DE' },
@@ -129,7 +125,6 @@ describe(ContractTableComponent.name, () => {
     cy.get('div.nx-context-menu button')
       .eq(3)
       .should('have.attr', 'nxContextMenuItem');
-    // TODO: Test navigation
   });
 
   it('should show an empty table hint if no contracts are provided', () => {

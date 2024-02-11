@@ -29,6 +29,9 @@
       ],
       "@az-testing-workshop/shared/util/test-helpers": [
         "libs/shared/util/test-helpers/src/index.ts"
+      ],
+      "@az-testing-workshop/shared/util/test-helpers/jest": [
+        "libs/shared/util/test-helpers/jest/src/index.ts"
       ]
     }
   },

@@ -8,7 +8,7 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { createSpyObserver } from '@az-testing-workshop/shared/util/test-helpers';
+import { createSpyObserver } from '@az-testing-workshop/shared/util/test-helpers/jest';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
 import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 

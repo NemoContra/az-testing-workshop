@@ -13,14 +13,12 @@ import { Location, registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import {
-  createSpyObserver,
-  DummyRouterDestinationComponent,
-} from '@az-testing-workshop/shared/util/test-helpers';
+import { mockComponent } from '@az-testing-workshop/shared/util/test-helpers';
 import { NxButtonHarness } from '@aposin/ng-aquila/button/testing';
 import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 import { NxInputHarness } from '@az-testing-workshop/shared/util/test-harnesses';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { createSpyObserver } from '@az-testing-workshop/shared/util/test-helpers/jest';
 
 registerLocaleData(localeDe);
 
@@ -44,8 +42,14 @@ describe('ContractTableComponent', () => {
     ],
     detectChanges: false,
     routes: [
-      { path: 'details/:id', component: DummyRouterDestinationComponent },
-      { path: 'transaktion/:id', component: DummyRouterDestinationComponent },
+      {
+        path: 'details/:id',
+        component: mockComponent({ selector: 'routing-dummy' }),
+      },
+      {
+        path: 'transaktion/:id',
+        component: mockComponent({ selector: 'routing-dummy' }),
+      },
     ],
     stubsEnabled: false,
   });
