@@ -78,6 +78,7 @@
     "jsonc-eslint-parser": "^2.1.0",
     "ng-mocks": "^14.12.1",
     "nx": "17.3.1",
+    "nx-cloud": "^18.0.0",
     "prettier": "^2.6.2",
     "react-refresh": "^0.10.0",
     "ts-jest": "^29.1.0",
