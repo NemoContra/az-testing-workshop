@@ -1,6 +1,6 @@
 import { createRoutingFactory, SpectatorRouting } from '@ngneat/spectator/jest';
 import { LOCALE_ID } from '@angular/core';
-import { ContractDisplayComponent } from '../../components/contract-display/contract-display.component';
+import { ContractDisplayComponent } from '../../shared/contract-display/contract-display.component';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { MockComponent, MockModule } from 'ng-mocks';
 import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';

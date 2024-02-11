@@ -1,5 +1,6 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   inject,
   Input,
@@ -12,7 +13,7 @@ import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { RouterLink } from '@angular/router';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
-import { ContractDisplayComponent } from '../../components/contract-display/contract-display.component';
+import { ContractDisplayComponent } from '../../shared/contract-display/contract-display.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +34,7 @@ import { ContractDisplayComponent } from '../../components/contract-display/cont
   templateUrl: './contract-details.component.html',
 })
 export default class ContractDetailsComponent {
-  private readonly cdr = inject(ChangeDetectorRef)
+  private readonly cdr = inject(ChangeDetectorRef);
   @Input() set id(id: string) {
     this.store.getContract(id);
     this.cdr.detectChanges();

@@ -104,7 +104,7 @@ describe('ContractTransactionStore', () => {
     expect(spectator.service.contract()).toEqual(undefined);
   });
 
-  it('should updateContract successful', () => {
+  it('should updateContract successfully', () => {
     const contract$ = new AsyncSubject<Contract>();
     const contractService = spectator.inject(ContractService);
     const contractOverviewStore = spectator.inject(ContractOverviewStore);

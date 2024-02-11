@@ -8,7 +8,7 @@ import { signal } from '@angular/core';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';
 import { TransactionsType } from '../../common/transaction-type';
 import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
-import { ContractDisplayComponent } from '../../components/contract-display/contract-display.component';
+import { ContractDisplayComponent } from '../../shared/contract-display/contract-display.component';
 import { NxDropdownHarness } from '@az-testing-workshop/shared/util/test-harnesses';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Router } from '@angular/router';
@@ -94,7 +94,7 @@ describe('ContractTransactionComponent', () => {
     expect(spectator.fixture).toMatchSnapshot();
   });
 
-  it('should render with contract without transactionType', () => {
+  it('should render with a contract without transactionType', () => {
     const spectator = createComponent({ props: { id: '123456789' } });
 
     store.loading.set(false);
@@ -110,7 +110,7 @@ describe('ContractTransactionComponent', () => {
     );
   });
 
-  it('should render with transactionType "Vertragskündigung"', async () => {
+  it('should render with a contract and with transactionType "Vertragskündigung"', async () => {
     const spectator = createComponent({
       queryParams: { transaktion: 'Kuendigung' },
       props: { transaktion: 'Kuendigung' },
@@ -256,7 +256,7 @@ describe('ContractTransactionComponent', () => {
     );
   });
 
-  it('should show an error if the contract is cancelled', () => {
+  it('should show an error message if the contract is cancelled', () => {
     const spectator = createComponent();
 
     store.loading.set(false);
@@ -264,8 +264,12 @@ describe('ContractTransactionComponent', () => {
     store.transactionType.set('Kuendigung');
     spectator.detectChanges();
 
-    expect(spectator.query('nx-error.cancel-error')?.innerHTML).toContain(
-      'Der Vertrag wurde bereits zum Jan 1, 2024 gekündigt'
-    );
+    expect(spectator.query('nx-error.cancel-error')).toMatchInlineSnapshot(`
+      <nx-error
+        class="cancel-error"
+      >
+        Der Vertrag wurde bereits zum Jan 1, 2024 gekündigt
+      </nx-error>
+    `);
   });
 });

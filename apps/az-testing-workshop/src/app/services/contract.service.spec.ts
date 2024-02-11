@@ -128,7 +128,7 @@ describe('ContractService', () => {
     });
   });
 
-  describe('update', () => {
+  describe('updateContract', () => {
     it('should call the api and update the contract successfully', () => {
       const spyObserver = createSpyObserver();
       spectator.service.updateContract(mockContracts[0]).subscribe(spyObserver);

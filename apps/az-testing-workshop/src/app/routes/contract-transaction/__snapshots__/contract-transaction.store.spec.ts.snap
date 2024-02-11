@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ContractTransactionStore should updateContract successful 1`] = `
+exports[`ContractTransactionStore should updateContract successfully 1`] = `
 [MockFunction] {
   "calls": [
     [

@@ -60,28 +60,28 @@ describe('ContractTableComponent', () => {
     spectator.detectChanges();
 
     expect(
-       spectator.query('div.scroll-container table[nxTable]'),
+      spectator.query('div.scroll-container table[nxTable]')
     ).not.toBeNull();
 
     expect(spectator.queryAll(' table[nxTable] tbody tr').length).toEqual(2);
 
     expectCorrectTableRow(
-       0,
-       '1/2345678/9',
-       'Homer',
-       'Simpson',
-       '16.05.1961',
-       '01.01.2024',
-       '-',
+      0,
+      '1/2345678/9',
+      'Homer',
+      'Simpson',
+      '16.05.1961',
+      '01.01.2024',
+      '-'
     );
     expectCorrectTableRow(
-       1,
-       '1/2345678/8',
-       'Bart',
-       'Simpson',
-       '21.08.1995',
-       '01.02.2024',
-       '-',
+      1,
+      '1/2345678/8',
+      'Bart',
+      'Simpson',
+      '21.08.1995',
+      '01.02.2024',
+      '-'
     );
   });
 
@@ -97,20 +97,20 @@ describe('ContractTableComponent', () => {
     spectator.detectChanges();
 
     expect(
-       spectator.query('div.scroll-container table[nxTable]'),
+      spectator.query('div.scroll-container table[nxTable]')
     ).not.toBeNull();
 
     const tableRows = spectator.queryAll(' table[nxTable] tbody tr');
 
     expect(
-       tableRows[0]
-          .querySelectorAll('td')[6]
-          .querySelector('button[nxIconButton="tertiary small"]'),
+      tableRows[0]
+        .querySelectorAll('td')[6]
+        .querySelector('button[nxIconButton="tertiary small"]')
     ).not.toBeNull();
     expect(
-       tableRows[1]
-          .querySelectorAll('td')[6]
-          .querySelector('button[nxIconButton="tertiary small"]'),
+      tableRows[1]
+        .querySelectorAll('td')[6]
+        .querySelector('button[nxIconButton="tertiary small"]')
     ).not.toBeNull();
 
     const actionMenuButtons = await loader.getAllHarnesses(NxButtonHarness);
@@ -130,7 +130,7 @@ describe('ContractTableComponent', () => {
     expect(actionMenuItems.length).toEqual(4);
     expect(actionMenuItems[0].textContent?.trim()).toEqual('Details anzeigen');
     expect(actionMenuItems[1].textContent?.trim()).toEqual(
-       'Transaktion durchführen',
+      'Transaktion durchführen'
     );
     expect(actionMenuItems[2].textContent?.trim()).toEqual('Nachname ändern');
     expect(actionMenuItems[3].textContent?.trim()).toEqual('Kündigung');
@@ -143,40 +143,40 @@ describe('ContractTableComponent', () => {
     ${'Nachname ändern'}         | ${'/transaktion/123456789?transaktion=AenderungNachname'} | ${'AenderungNachname'}
     ${'Kündigung'}               | ${'/transaktion/123456789?transaktion=Kuendigung'}        | ${'Kuendigung'}
   `(
-     'should have to correct routerLink for menu item $label',
-     async ({ label, routerLink }) => {
-       spectator = createComponent({
-         props: {
-           contracts: mockContracts,
-         },
-       });
+    'should have to correct routerLink for menu item $label',
+    async ({ label, routerLink }) => {
+      spectator = createComponent({
+        props: {
+          contracts: mockContracts,
+        },
+      });
 
-       loader = TestbedHarnessEnvironment.loader(spectator.fixture);
+      loader = TestbedHarnessEnvironment.loader(spectator.fixture);
 
-       const actionMenuButtons = await loader.getAllHarnesses(NxButtonHarness);
-       await actionMenuButtons[0].click();
+      const actionMenuButtons = await loader.getAllHarnesses(NxButtonHarness);
+      await actionMenuButtons[0].click();
 
-       await spectator.fixture.whenStable();
+      await spectator.fixture.whenStable();
 
-       expect(
-          spectator.query(byTextContent(label, { selector: 'button' }), {
+      expect(
+        spectator.query(byTextContent(label, { selector: 'button' }), {
+          root: true,
+        })
+      ).not.toBeNull();
+
+      spectator
+        .query<HTMLButtonElement>(
+          byTextContent(label, { selector: 'button' }),
+          {
             root: true,
-          }),
-       ).not.toBeNull();
+          }
+        )
+        ?.click();
 
-       spectator
-          .query<HTMLButtonElement>(
-             byTextContent(label, { selector: 'button' }),
-             {
-               root: true,
-             },
-          )
-          ?.click();
+      await spectator.fixture.whenStable();
 
-       await spectator.fixture.whenStable();
-
-       expect(spectator.inject(Location).path()).toBe(routerLink);
-     },
+      expect(spectator.inject(Location).path()).toBe(routerLink);
+    }
   );
 
   it('should show an empty table hint if no contracts are provided', () => {
@@ -189,18 +189,18 @@ describe('ContractTableComponent', () => {
     spectator.detectChanges();
 
     expect(
-       spectator.query('div.scroll-container table[nxTable]'),
+      spectator.query('div.scroll-container table[nxTable]')
     ).not.toBeNull();
     expect(
-       spectator.queryAll('div.scroll-container table[nxTable] tbody tr').length,
+      spectator.queryAll('div.scroll-container table[nxTable] tbody tr').length
     ).toEqual(1);
     expect(
-       spectator.queryAll('div.scroll-container table[nxTable] tbody tr td')
-          .length,
+      spectator.queryAll('div.scroll-container table[nxTable] tbody tr td')
+        .length
     ).toEqual(1);
     expect(
-       spectator.query('div.scroll-container table[nxTable] tbody tr td')
-          ?.textContent,
+      spectator.query('div.scroll-container table[nxTable] tbody tr td')
+        ?.textContent
     ).toEqual('Keine Verträge vorhanden.');
   });
 
@@ -234,20 +234,26 @@ describe('ContractTableComponent', () => {
     expect(outputEvent.next).toHaveBeenCalledWith('Homer');
     expect(outputEvent.error).not.toHaveBeenCalled();
     expect(outputEvent.complete).not.toHaveBeenCalled();
+
+    await searchInput.writeValue('Homer');
+
+    tick(300);
+
+    expect(outputEvent.next).toHaveBeenCalledTimes(1);
   }));
 
   const expectCorrectTableRow = (
-     index: number,
-     contractNumber: string,
-     firstname: string,
-     lastname: string,
-     dateOfBirth: string,
-     start: string,
-     ende: string,
+    index: number,
+    contractNumber: string,
+    firstname: string,
+    lastname: string,
+    dateOfBirth: string,
+    start: string,
+    ende: string
   ) => {
     const tableRow = spectator.queryAll('table[nxTable] tbody tr')[index];
     expect(tableRow.querySelectorAll('td')[0].textContent).toEqual(
-       contractNumber,
+      contractNumber
     );
     expect(tableRow.querySelectorAll('td')[1].textContent).toEqual(firstname);
     expect(tableRow.querySelectorAll('td')[2].textContent).toEqual(lastname);

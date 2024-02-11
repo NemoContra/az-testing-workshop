@@ -22,7 +22,7 @@ import {
 } from '../../common/transaction-type';
 import { DatePipe } from '@angular/common';
 import { NxMessageToastService } from '@aposin/ng-aquila/message';
-import { ContractDisplayComponent } from '../../components/contract-display/contract-display.component';
+import { ContractDisplayComponent } from '../../shared/contract-display/contract-display.component';
 import { getNowDateString } from '../../common/get-now-date-string';
 
 @Component({

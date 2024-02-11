@@ -1,7 +1,7 @@
 import { createComponentFactory } from '@ngneat/spectator/jest';
 import ContractOverviewComponent from './contract-overview.component';
 import { Router } from '@angular/router';
-import { ContractTableComponent } from '../../components/contract-table/contract-table.components';
+import { ContractTableComponent } from '../../shared/contract-table/contract-table.components';
 import { ContractOverviewStore } from './contract-overview.store';
 import { signal } from '@angular/core';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';
