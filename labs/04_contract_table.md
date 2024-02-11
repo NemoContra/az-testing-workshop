@@ -4,9 +4,9 @@
 
 1. Check out the branch `start` (if have not done so yet).
 
-  ```console
-  git checkout start
-  ```
+```console
+git checkout start
+```
 
 1. Open the folder `apps/az-testing-workshop/src/app/components/contract-table`.
 
@@ -20,9 +20,9 @@
 
 1. If you are searching for an example solution checkout the branch `final`.
 
-  ```console
-    git checkout final
-  ```
+```console
+  git checkout final
+```
 
 ## Component-testing
 
@@ -38,7 +38,6 @@ Now as we are finished with the unit-tests for this component we want to test th
 
 1. If you are searching for an example solution checkout the branch `final`.
 
-  ```console
-    git checkout final
-  ```
-
+```console
+  git checkout final
+```

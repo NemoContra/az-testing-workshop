@@ -18,7 +18,10 @@ describe('AzTestingWorkshop', () => {
     cy.intercept('/api/contracts', []);
 
     cy.get('contract-table table tbody tr').should('have.length', 1);
-    cy.get('contract-table table tbody tr td').should('have.text', 'Keine Verträge vorhanden.');
+    cy.get('contract-table table tbody tr td').should(
+      'have.text',
+      'Keine Verträge vorhanden.'
+    );
   });
 
   it('should navigate to the details page when opening the context menu of a contract', () => {
@@ -30,7 +33,7 @@ describe('AzTestingWorkshop', () => {
 
     cy.contains('Details anzeigen').click();
 
-    cy.url().should('contain', '/details/123456789')
+    cy.url().should('contain', '/details/123456789');
   });
 
   it('should navigate to transaction "Nachname äendern"', () => {
@@ -42,6 +45,9 @@ describe('AzTestingWorkshop', () => {
 
     cy.contains('Nachname ändern').click();
 
-    cy.url().should('contain', '/transaktion/123456789?transaktion=AenderungNachname')
+    cy.url().should(
+      'contain',
+      '/transaktion/123456789?transaktion=AenderungNachname'
+    );
   });
 });

@@ -6,9 +6,9 @@ This repository contains two application inside the `apps directory`. An Angular
 
 1. Check out the branch `start`.
 
-  ```console
-  git checkout start
-  ```
+```console
+git checkout start
+```
 
 1. Open the folder `apps/az-testing-workshop/src/app/components/contract-display`.
 
@@ -22,6 +22,6 @@ This repository contains two application inside the `apps directory`. An Angular
 
 1. If you are searching for an example solution checkout the branch `final`.
 
-  ```console
-    git checkout final
-  ```
+```console
+  git checkout final
+```
