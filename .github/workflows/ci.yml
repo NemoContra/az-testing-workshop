@@ -1,30 +1,31 @@
 name: CI
+
 on:
   push:
     branches:
       - main
   pull_request:
 
-permissions:
-  actions: read
-  contents: read
-
 jobs:
   main:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: 'npm'
-      - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
-      - run: npm ci
+    name: Nx Cloud - Main Job
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.13.0
+    with:
+      main-branch-name: main
+      number-of-agents: 5
+      init-commands: |
+        npx nx-cloud start-ci-run --stop-agents-after="build" --agent-count=5
+      parallel-commands: |
+        npx nx-cloud record -- npx nx format:check
+      parallel-commands-on-agents: |
+        npx nx affected --target=lint --parallel=3
+        npx nx affected --target=test --parallel=3 --ci --code-coverage
+        npx nx affected --target=build --parallel=3
+        npx nx affected --target=e2e --parallel=3
+        npx nx affected --target=component-test --parallel=3
 
-      - uses: nrwl/nx-set-shas@v3
-      - run: git branch --track main origin/main
-
-      - run: npx nx-cloud record -- nx format:check
-      - run: npx nx affected -t lint test component-test e2e build
+  agents:
+    name: Nx Cloud - Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.13.0
+    with:
+      number-of-agents: 5
