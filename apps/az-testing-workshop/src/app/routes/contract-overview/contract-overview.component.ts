@@ -26,7 +26,7 @@ export default class ContractOverviewComponent {
   overviewStore = inject(ContractOverviewStore);
   private router = inject(Router);
 
-  async setQuery(query: string) {
+  async setQuery(query: string | undefined) {
     await this.router.navigate(
       [],
       query ? { queryParams: { query } } : undefined
