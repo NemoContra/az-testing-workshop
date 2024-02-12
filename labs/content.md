@@ -40,3 +40,8 @@
 1. contract-transaction component
 1. contract-transaction store
 1. e2e-test
+
+- [ ] MH: Finish labs
+- [ ] MH: Create start branch
+- [ ] FT: Finish slides
+- [ ] FT & MH: Ablauf besprechen
