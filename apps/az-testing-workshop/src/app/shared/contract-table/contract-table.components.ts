@@ -18,7 +18,7 @@ import { NxMenuModule } from '@aposin/ng-aquila/menu';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxContextMenuModule } from '@aposin/ng-aquila/context-menu';
 import { transactionQueryParam } from '../../common/transaction-type';
-import { debounceTime, distinctUntilChanged, filter, skip } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { emptyContract } from '../../common/empty-contract';
 
 @Component({
@@ -44,7 +44,7 @@ export class ContractTableComponent {
   query = signal<string | undefined>(undefined);
   @Output() queryChange = toObservable(this.query).pipe(
     filter((query) => query !== undefined),
-    debounceTime(201),
+    debounceTime(200),
     distinctUntilChanged()
   );
 

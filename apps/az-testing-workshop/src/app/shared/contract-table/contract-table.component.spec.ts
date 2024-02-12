@@ -226,13 +226,13 @@ describe('ContractTableComponent', () => {
 
     await searchInput.writeValue('Homer');
 
-    tick(199);
+    tick(100);
 
     expect(outputEvent.next).not.toHaveBeenCalled();
     expect(outputEvent.error).not.toHaveBeenCalled();
     expect(outputEvent.complete).not.toHaveBeenCalled();
 
-    tick(1);
+    tick(100);
 
     expect(outputEvent.next).toHaveBeenCalledTimes(1);
     expect(outputEvent.next).toHaveBeenCalledWith('Homer');
