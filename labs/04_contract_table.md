@@ -10,7 +10,7 @@ git checkout start
 
 1. Open the folder `apps/az-testing-workshop/src/app/components/contract-table`.
 
-1. Here you will find the ContractTableComponent which renders a search input field and all contracts within a table.
+1. Here you will find the `ContractTableComponent` which renders a search input field and all contracts within a table.
 
 1. Have a look on it and try to get an overview how it works exactly and how you could setup a unit test.
 

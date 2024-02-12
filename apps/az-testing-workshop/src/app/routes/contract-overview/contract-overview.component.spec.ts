@@ -17,7 +17,7 @@ const createContractOverviewStoreMock = () => ({
   setQuery: jest.fn(),
 });
 
-describe('ContractOverview', () => {
+describe('ContractOverviewComponent', () => {
   let contractOverviewStoreMock: ReturnType<
     typeof createContractOverviewStoreMock
   >;

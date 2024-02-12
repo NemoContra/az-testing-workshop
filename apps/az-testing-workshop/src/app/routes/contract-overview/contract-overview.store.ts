@@ -7,7 +7,7 @@ import {
 } from '@ngrx/signals';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { debounceTime, distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
+import { pipe, switchMap, tap } from 'rxjs';
 import { inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { tapResponse } from '@ngrx/operators';
@@ -34,8 +34,6 @@ export const ContractOverviewStore = signalStore(
     setQuery: (query: string) => patchState(store, { query }),
     getContracts: rxMethod<string>(
       pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
         tap(() => patchState(store, { loading: true })),
         switchMap((query) =>
           contractService.getContracts(query).pipe(
@@ -51,6 +49,10 @@ export const ContractOverviewStore = signalStore(
     ),
   })),
   withHooks(({ getContracts, query }) => ({
-    onInit: () => getContracts(query),
+    onInit: () => {
+      getContracts(query);
+    },
   }))
 );
+
+export type ContractOverviewStore = InstanceType<typeof ContractOverviewStore>;

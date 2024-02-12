@@ -35,8 +35,8 @@
 1. contract-table unit-test
 1. contract-table component-test?
 1. contract-overview
+1. contract-overview store
 1. contract-details component
-1. contract-details store
 1. contract-transaction component
 1. contract-transaction store
 1. e2e-test

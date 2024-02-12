@@ -30,7 +30,7 @@ import { ContractDisplayComponent } from '../../shared/contract-display/contract
   providers: [ContractDetailsStore],
   selector: 'contract-details',
   standalone: true,
-  styleUrl: './contract-details.components.scss',
+  styleUrl: './contract-details.component.scss',
   templateUrl: './contract-details.component.html',
 })
 export default class ContractDetailsComponent {

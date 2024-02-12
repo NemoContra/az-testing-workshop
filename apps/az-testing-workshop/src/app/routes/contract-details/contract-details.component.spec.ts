@@ -9,14 +9,13 @@ import { NxDataDisplayModule } from '@aposin/ng-aquila/data-display';
 import { NxErrorComponent, NxErrorModule } from '@aposin/ng-aquila/base';
 import { NxSpinnerComponent, NxSpinnerModule } from '@aposin/ng-aquila/spinner';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
-import { ContractService } from '../../services/contract.service';
-import { of, throwError } from 'rxjs';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { ContractService } from '../../services/contract.service';
+import { NEVER, of, throwError } from 'rxjs';
 
 registerLocaleData(localeDe);
+
 describe('ContractDetailsComponent', () => {
   let spectator: SpectatorRouting<ContractDetailsComponent>;
 
@@ -24,12 +23,16 @@ describe('ContractDetailsComponent', () => {
     component: ContractDetailsComponent,
     providers: [
       { provide: LOCALE_ID, useValue: 'de-DE' },
-      provideHttpClient(),
-      provideHttpClientTesting(),
+      {
+        provide: ContractService,
+        useFactory: () => ({
+          getContract: jest.fn().mockReturnValue(of(mockContracts[0])),
+        }),
+      },
     ],
     overrideComponents: [
       [
-        ContractDisplayComponent,
+        ContractDetailsComponent,
         {
           remove: {
             imports: [
@@ -59,10 +62,6 @@ describe('ContractDetailsComponent', () => {
   it('should render content with contract-display component if contractService is returning data successfully', () => {
     spectator = createComponent();
 
-    jest
-      .spyOn(spectator.inject(ContractService), 'getContract')
-      .mockReturnValue(of(mockContracts[0]));
-
     spectator.setInput('id', '123456789');
 
     expect(spectator.inject(ContractService).getContract).toHaveBeenCalledWith(
@@ -80,7 +79,7 @@ describe('ContractDetailsComponent', () => {
   it('should show a loading spinner if data is loading', () => {
     spectator = createComponent();
 
-    jest.spyOn(spectator.inject(ContractService), 'getContract');
+    spectator.inject(ContractService).getContract.mockReturnValue(NEVER);
 
     spectator.setInput('id', '123456789');
 
@@ -97,9 +96,9 @@ describe('ContractDetailsComponent', () => {
   it('should show an error if contractService is returning an error ', () => {
     spectator = createComponent();
 
-    jest
-      .spyOn(spectator.inject(ContractService), 'getContract')
-      .mockReturnValue(throwError(() => ({ status: 500 })));
+    spectator
+      .inject(ContractService)
+      .getContract.mockReturnValue(throwError(() => ({ status: 500 })));
 
     spectator.setInput('id', '123456789');
 
