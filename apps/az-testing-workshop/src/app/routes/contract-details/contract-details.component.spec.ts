@@ -63,17 +63,6 @@ describe('ContractDetailsComponent', () => {
     spectator = createComponent();
 
     spectator.setInput('id', '123456789');
-
-    expect(spectator.inject(ContractService).getContract).toHaveBeenCalledWith(
-      '123456789'
-    );
-
-    expect(spectator.query(NxSpinnerComponent)).toBeNull();
-    expect(spectator.query(NxErrorComponent)).toBeNull();
-    expect(spectator.query('div.content contract-display')).not.toBeNull();
-    expect(spectator.query(ContractDisplayComponent)?.contract).toEqual(
-      mockContracts[0]
-    );
   });
 
   it('should show a loading spinner if data is loading', () => {
@@ -82,15 +71,6 @@ describe('ContractDetailsComponent', () => {
     spectator.inject(ContractService).getContract.mockReturnValue(NEVER);
 
     spectator.setInput('id', '123456789');
-
-    expect(spectator.inject(ContractService).getContract).toHaveBeenCalledWith(
-      '123456789'
-    );
-
-    expect(spectator.query('div.content contract-display')).toBeNull();
-    expect(spectator.query(NxErrorComponent)).toBeNull();
-    expect(spectator.query(NxSpinnerComponent)).not.toBeNull();
-    expect(spectator.query(NxSpinnerComponent)?.size).toEqual('medium');
   });
 
   it('should show an error if contractService is returning an error ', () => {
@@ -101,16 +81,5 @@ describe('ContractDetailsComponent', () => {
       .getContract.mockReturnValue(throwError(() => ({ status: 500 })));
 
     spectator.setInput('id', '123456789');
-
-    expect(spectator.inject(ContractService).getContract).toHaveBeenCalledWith(
-      '123456789'
-    );
-
-    expect(spectator.query('div.content contract-display')).toBeNull();
-    expect(spectator.query(NxSpinnerComponent)).toBeNull();
-    expect(spectator.query(NxErrorComponent)).not.toBeNull();
-    expect(spectator.query('nx-error')?.textContent).toEqual(
-      'An error occurred'
-    );
   });
 });

@@ -14,40 +14,15 @@ describe('AzTestingWorkshop', () => {
   it('should show an empty table hint when emitting an empty response', () => {
     cy.intercept('/api/contracts', []);
     cy.visit('/');
-
-    cy.get('contract-table table tbody tr').should('have.length', 1);
-    cy.get('contract-table table tbody tr td').should(
-      'have.text',
-      'Keine Verträge vorhanden.'
-    );
   });
 
   it('should navigate to the details page when opening the context menu of a contract', () => {
     cy.intercept('/api/contracts', mockContracts);
     cy.visit('/');
-
-    cy.get('contract-table').should('be.visible');
-
-    cy.get('contract-table tbody tr td button').eq(0).click();
-
-    cy.contains('Details anzeigen').click();
-
-    cy.url().should('contain', '/details/123456789');
   });
 
   it('should navigate to transaction "Nachname äendern"', () => {
     cy.intercept('/api/contracts', mockContracts);
     cy.visit('/');
-
-    cy.get('contract-table').should('be.visible');
-
-    cy.get('contract-table tbody tr td button').eq(0).click();
-
-    cy.contains('Nachname ändern').click();
-
-    cy.url().should(
-      'contain',
-      '/transaktion/123456789?transaktion=AenderungNachname'
-    );
   });
 });

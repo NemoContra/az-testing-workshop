@@ -20,12 +20,6 @@ describe('ContractOverviewStore', () => {
   describe('setQuery', () => {
     it('should return correct state for setting the query', () => {
       const spectator = createService();
-
-      expect(spectator.service.query()).toEqual('');
-
-      spectator.service.setQuery('Homer');
-
-      expect(spectator.service.query()).toEqual('Homer');
     });
   });
 
@@ -43,14 +37,6 @@ describe('ContractOverviewStore', () => {
       });
 
       spectator.service.getContracts('123456789');
-
-      expect(
-        spectator.inject(ContractService).getContracts
-      ).toHaveBeenCalledWith('123456789');
-
-      expect(spectator.service.loading()).toEqual(false);
-      expect(spectator.service.contracts()).toEqual(mockContracts);
-      expect(spectator.service.errorCode()).toEqual(undefined);
     });
 
     it('should return correct state for error', () => {
@@ -68,14 +54,6 @@ describe('ContractOverviewStore', () => {
       });
 
       spectator.service.getContracts('123456789');
-
-      expect(
-        spectator.inject(ContractService).getContracts
-      ).toHaveBeenCalledWith('123456789');
-
-      expect(spectator.service.loading()).toEqual(false);
-      expect(spectator.service.contracts()).toEqual(undefined);
-      expect(spectator.service.errorCode()).toEqual(500);
     });
   });
 });

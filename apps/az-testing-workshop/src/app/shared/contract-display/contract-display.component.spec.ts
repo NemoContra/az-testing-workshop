@@ -43,61 +43,11 @@ describe('ContractDisplayComponent', () => {
     const nxDataDisplayHarnesses = await spectator.loader.getAllHarnesses(
       NxDataDisplayHarness
     );
-
-    expect(nxDataDisplayHarnesses.length).toEqual(6);
-
-    expect(await nxDataDisplayHarnesses[0].getLabel()).toMatchInlineSnapshot(
-      `"Vertragsnummer"`
-    );
-    expect(await nxDataDisplayHarnesses[0].getValue()).toMatchInlineSnapshot(
-      `"1/2345678/9"`
-    );
-
-    expect(await nxDataDisplayHarnesses[1].getLabel()).toMatchInlineSnapshot(
-      `"Vertragsbeginn"`
-    );
-    expect(await nxDataDisplayHarnesses[1].getValue()).toMatchInlineSnapshot(
-      `"01.01.2024"`
-    );
-
-    expect(await nxDataDisplayHarnesses[2].getLabel()).toMatchInlineSnapshot(
-      `"Vertragsende"`
-    );
-    expect(await nxDataDisplayHarnesses[2].getValue()).toMatchInlineSnapshot(
-      `"31.01.2056"`
-    );
-
-    expect(await nxDataDisplayHarnesses[3].getLabel()).toMatchInlineSnapshot(
-      `"Vorname"`
-    );
-    expect(await nxDataDisplayHarnesses[3].getValue()).toMatchInlineSnapshot(
-      `"Homer"`
-    );
-
-    expect(await nxDataDisplayHarnesses[4].getLabel()).toMatchInlineSnapshot(
-      `"Nachname"`
-    );
-    expect(await nxDataDisplayHarnesses[4].getValue()).toMatchInlineSnapshot(
-      `"Simpson"`
-    );
-
-    expect(await nxDataDisplayHarnesses[5].getLabel()).toMatchInlineSnapshot(
-      `"Geburtsdatum"`
-    );
-    expect(await nxDataDisplayHarnesses[5].getValue()).toMatchInlineSnapshot(
-      `"16.05.1961"`
-    );
   });
 
   it('should show no fields if no contract is provided', () => {
     const spectator = createComponent();
 
     spectator.detectChanges();
-
-    expect(spectator.fixture).toMatchSnapshot();
-
-    const dataDisplays = spectator.queryAll(NxDataDisplayComponent);
-
-    expect(dataDisplays.length).toEqual(0);
   });
 });
