@@ -6,37 +6,38 @@ describe('TransactionTypePipe', () => {
   const createPipe = createPipeFactory(TransactionTypePipe);
 
   /**
-   * We can test pipes using spectator with real template and rendering
+   * We can test pipes with `createPipeFactory` from spectator
    */
-  it.each([
-    {
-      transactionType: 'AenderungNachname' satisfies TransactionsType,
-    },
-    {
-      transactionType: 'Kuendigung' satisfies TransactionsType,
-    },
-  ])(
-    'should render the transactionType for $transactionType',
-    ({ transactionType }) => {
+  describe('with spectator', () => {
+    it('should render the transactionType for "AenderungNachname"', () => {
       const spectator = createPipe(
-        `<span>{{ '${transactionType}' | transactionType }}</span>`
+        `<span>{{ 'AenderungNachname' | transactionType }}</span>`
       );
       expect(spectator.fixture).toMatchSnapshot();
-    }
-  );
+    });
+
+    it('should render the transactionType for "Kuendigung"', () => {
+      const spectator = createPipe(
+        `<span>{{ 'Kuendigung' | transactionType }}</span>`
+      );
+      expect(spectator.fixture).toMatchSnapshot();
+    });
+  });
 
   /**
    * We can test pipes by creating an instance manually and calling the transform method
    */
-  it.each`
-    transactionType                                   | result
-    ${'AenderungNachname' satisfies TransactionsType} | ${'Änderung des Nachnamen'}
-    ${'Kuendigung' satisfies TransactionsType}        | ${'Vertragskündigung'}
-  `(
-    'should transform the transactionType for $transactionType',
-    ({ transactionType, result }) => {
-      const pipe = new TransactionTypePipe();
-      expect(pipe.transform(transactionType)).toEqual(result);
-    }
-  );
+  describe('with constructor usage', () => {
+    it.each`
+      transactionType                                   | result
+      ${'AenderungNachname' satisfies TransactionsType} | ${'Änderung des Nachnamen'}
+      ${'Kuendigung' satisfies TransactionsType}        | ${'Vertragskündigung'}
+    `(
+      'should transform the transactionType for $transactionType',
+      ({ transactionType, result }) => {
+        const pipe = new TransactionTypePipe();
+        expect(pipe.transform(transactionType)).toEqual(result);
+      }
+    );
+  });
 });

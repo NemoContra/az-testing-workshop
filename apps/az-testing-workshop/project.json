@@ -102,8 +102,7 @@
         "devServerTarget": "az-testing-workshop:serve",
         "baseUrl": "http://localhost:4200"
       },
-      "configurations": {
-      }
+      "configurations": {}
     },
     "component-test": {
       "executor": "@nx/cypress:cypress",

@@ -4,7 +4,7 @@ import {
   inject,
   Input,
 } from '@angular/core';
-import { ContractTableComponent } from '../../components/contract-table/contract-table.components';
+import { ContractTableComponent } from '../../shared/contract-table/contract-table.components';
 import { ContractOverviewStore } from './contract-overview.store';
 import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
 import { NxErrorModule } from '@aposin/ng-aquila/base';
@@ -26,7 +26,7 @@ export default class ContractOverviewComponent {
   overviewStore = inject(ContractOverviewStore);
   private router = inject(Router);
 
-  async setQuery(query: string) {
+  async setQuery(query = '') {
     await this.router.navigate(
       [],
       query ? { queryParams: { query } } : undefined

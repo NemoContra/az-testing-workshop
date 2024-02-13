@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { ContractTransactionStore } from './contract-transaction.store';
 import { NxDropdownModule } from '@aposin/ng-aquila/dropdown';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { TransactionTypePipe } from './transaction-type.pipe';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
@@ -23,23 +22,23 @@ import {
 } from '../../common/transaction-type';
 import { DatePipe } from '@angular/common';
 import { NxMessageToastService } from '@aposin/ng-aquila/message';
-import { ContractDisplayComponent } from '../../components/contract-display/contract-display.component';
+import { ContractDisplayComponent } from '../../shared/contract-display/contract-display.component';
+import { getNowDateString } from '../../common/get-now-date-string';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    NxDropdownModule,
-    NxFormfieldModule,
     TransactionTypePipe,
+    ContractDisplayComponent,
+    NxDropdownModule,
+    NxInputModule,
     NxIconModule,
     NxLinkModule,
     RouterLink,
-    NxInputModule,
     NxSpinnerModule,
     NxButtonModule,
     FormsModule,
     DatePipe,
-    ContractDisplayComponent,
   ],
   providers: [ContractTransactionStore],
   selector: 'contract-transaction',
@@ -85,7 +84,7 @@ export default class ContractTransactionComponent {
   }
 
   submitKuendigung(contract: Contract): void {
-    this.store.updateContract({ ...contract, end: new Date().toDateString() });
+    this.store.updateContract({ ...contract, end: getNowDateString() });
     this.messageToastService.open('Kündigung erfolgreich durchgeführt', {
       context: 'success',
       duration: 5000,

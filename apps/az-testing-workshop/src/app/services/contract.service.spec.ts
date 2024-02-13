@@ -8,11 +8,9 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import {
-  createSpyObserver,
-  mockContracts,
-} from '@az-testing-workshop/test-helpers';
+import { createSpyObserver } from '@az-testing-workshop/shared/util/test-helpers/jest';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
+import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 
 describe('ContractService', () => {
   let spectator: SpectatorService<ContractService>;
@@ -130,7 +128,7 @@ describe('ContractService', () => {
     });
   });
 
-  describe('update', () => {
+  describe('updateContract', () => {
     it('should call the api and update the contract successfully', () => {
       const spyObserver = createSpyObserver();
       spectator.service.updateContract(mockContracts[0]).subscribe(spyObserver);

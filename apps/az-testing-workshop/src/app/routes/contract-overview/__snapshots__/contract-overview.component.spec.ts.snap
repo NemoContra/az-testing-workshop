@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ContractOverview should render contracts-table 1`] = `
+exports[`ContractOverviewComponent should render contracts-table 1`] = `
 <contract-overview
   overviewStore={[Function Object]}
   router={[Function Object]}
@@ -12,7 +12,7 @@ exports[`ContractOverview should render contracts-table 1`] = `
 </contract-overview>
 `;
 
-exports[`ContractOverview should render error message 1`] = `
+exports[`ContractOverviewComponent should render error message 1`] = `
 <contract-overview
   overviewStore={[Function Object]}
   router={[Function Object]}
@@ -26,7 +26,7 @@ exports[`ContractOverview should render error message 1`] = `
 </contract-overview>
 `;
 
-exports[`ContractOverview should render loading-spinner 1`] = `
+exports[`ContractOverviewComponent should render loading-spinner 1`] = `
 <contract-overview
   overviewStore={[Function Object]}
   router={[Function Object]}

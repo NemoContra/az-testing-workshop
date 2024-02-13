@@ -1,14 +1,14 @@
 import { createComponentFactory } from '@ngneat/spectator/jest';
 import ContractOverviewComponent from './contract-overview.component';
 import { Router } from '@angular/router';
-import { ContractTableComponent } from '../../components/contract-table/contract-table.components';
+import { ContractTableComponent } from '../../shared/contract-table/contract-table.components';
 import { ContractOverviewStore } from './contract-overview.store';
 import { signal } from '@angular/core';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';
 import { MockComponent, MockModule } from 'ng-mocks';
 import { NxErrorModule } from '@aposin/ng-aquila/base';
 import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
-import { mockContracts } from '@az-testing-workshop/test-helpers';
+import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 
 const createContractOverviewStoreMock = () => ({
   errorCode: signal<number | undefined>(undefined),
@@ -17,7 +17,7 @@ const createContractOverviewStoreMock = () => ({
   setQuery: jest.fn(),
 });
 
-describe('ContractOverview', () => {
+describe('ContractOverviewComponent', () => {
   let contractOverviewStoreMock: ReturnType<
     typeof createContractOverviewStoreMock
   >;

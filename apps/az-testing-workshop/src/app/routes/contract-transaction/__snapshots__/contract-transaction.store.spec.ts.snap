@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContractTransactionStore should updateContract successfully 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      {
+        "contract": [Function],
+        "errorCode": [Function],
+        "loading": [Function],
+        "transactionType": [Function],
+        Symbol(STATE_SIGNAL): [Function],
+      },
+      {
+        "loading": true,
+      },
+    ],
+    [
+      {
+        "contract": [Function],
+        "errorCode": [Function],
+        "loading": [Function],
+        "transactionType": [Function],
+        Symbol(STATE_SIGNAL): [Function],
+      },
+      {
+        "contract": {
+          "contractNumber": "1/2345678/9",
+          "id": "123456789",
+          "person": {
+            "dateOfBirth": "1961-05-16",
+            "firstname": "Berthold",
+            "lastname": "Heisterkamp",
+          },
+          "premium": 42.42,
+          "start": "2024-01-01",
+        },
+      },
+    ],
+    [
+      [Function],
+      {
+        "contracts": [
+          {
+            "contractNumber": "1/2345678/9",
+            "id": "123456789",
+            "person": {
+              "dateOfBirth": "1961-05-16",
+              "firstname": "Berthold",
+              "lastname": "Heisterkamp",
+            },
+            "premium": 42.42,
+            "start": "2024-01-01",
+          },
+          {
+            "contractNumber": "1/2345678/8",
+            "id": "123456788",
+            "person": {
+              "dateOfBirth": "1995-08-21",
+              "firstname": "Bart",
+              "lastname": "Simpson",
+            },
+            "premium": 99,
+            "start": "2024-02-01",
+          },
+        ],
+      },
+    ],
+    [
+      {
+        "contract": [Function],
+        "errorCode": [Function],
+        "loading": [Function],
+        "transactionType": [Function],
+        Symbol(STATE_SIGNAL): [Function],
+      },
+      {
+        "loading": false,
+      },
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+    {
+      "type": "return",
+      "value": undefined,
+    },
+    {
+      "type": "return",
+      "value": undefined,
+    },
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
