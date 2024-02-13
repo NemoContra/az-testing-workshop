@@ -3,7 +3,6 @@ import {
   createRoutingFactory,
   SpectatorRouting,
 } from '@ngneat/spectator/jest';
-import { ContractDisplayComponent } from '../contract-display/contract-display.component';
 import { LOCALE_ID } from '@angular/core';
 import { MockModule } from 'ng-mocks';
 import { ContractTableComponent } from './contract-table.components';
@@ -31,7 +30,7 @@ describe('ContractTableComponent', () => {
     providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
     overrideComponents: [
       [
-        ContractDisplayComponent,
+        ContractTableComponent,
         {
           remove: { imports: [NxIconModule, NxLinkModule] },
           add: {
