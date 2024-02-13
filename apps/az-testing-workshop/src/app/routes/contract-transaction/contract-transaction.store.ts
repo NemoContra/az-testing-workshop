@@ -7,7 +7,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { TransactionsType } from '../../common/transaction-type';
 import { ContractService } from '../../services/contract.service';
-import { ContractOverviewStore } from '../contraxt-overview/contract-overview.store';
+import { ContractOverviewStore } from '../contract-overview/contract-overview.store';
+import { optimisticUpdateContracts } from '../../common/optimistic-update-contracts';
 
 export type ContractTransactionState = {
   contract: Contract | undefined;
@@ -23,21 +24,13 @@ export const initialContractTransactionState: ContractTransactionState = {
   transactionType: undefined,
 };
 
-const optimisticUpdateContracts = (
-  contracts: Contract[] | undefined,
-  updatedContract: Contract
-) =>
-  contracts?.map((contract) =>
-    contract.id === updatedContract.id ? updatedContract : contract
-  );
-
 export const ContractTransactionStore = signalStore(
   withState(initialContractTransactionState),
   withMethods(
     (
       store,
       contractService = inject(ContractService),
-      { contracts, ...contractOverviewStore } = inject(ContractOverviewStore)
+      contractOverviewStore = inject(ContractOverviewStore)
     ) => ({
       selectTransaction: (transactionType: TransactionsType) =>
         patchState(store, { transactionType }),
@@ -65,7 +58,10 @@ export const ContractTransactionStore = signalStore(
                 next: (contract) => {
                   patchState(store, { contract });
                   patchState(contractOverviewStore, {
-                    contracts: optimisticUpdateContracts(contracts(), contract),
+                    contracts: optimisticUpdateContracts(
+                      contractOverviewStore.contracts(),
+                      contract
+                    ),
                   });
                 },
                 error: ({ status }: HttpErrorResponse) =>

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContractOverviewComponent should render contracts-table 1`] = `
+<contract-overview
+  overviewStore={[Function Object]}
+  router={[Function Object]}
+>
+  <div
+    class="spinner-outlet"
+  >
+  </div><contract-table />
+</contract-overview>
+`;
+
+exports[`ContractOverviewComponent should render error message 1`] = `
+<contract-overview
+  overviewStore={[Function Object]}
+  router={[Function Object]}
+>
+  <nx-error>
+    An error occurred
+  </nx-error><div
+    class="spinner-outlet"
+  >
+  </div>
+</contract-overview>
+`;
+
+exports[`ContractOverviewComponent should render loading-spinner 1`] = `
+<contract-overview
+  overviewStore={[Function Object]}
+  router={[Function Object]}
+>
+  <div
+    class="spinner-outlet"
+  >
+    <nx-spinner
+      size="medium"
+    />
+  </div>
+</contract-overview>
+`;

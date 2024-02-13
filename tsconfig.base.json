@@ -17,6 +17,21 @@
     "paths": {
       "@az-testing-workshop/shared/util/api-models": [
         "libs/shared/util/api-models/src/index.ts"
+      ],
+      "@az-testing-workshop/shared/util/harnesses": [
+        "libs/shared/util/harnesses/src/index.ts"
+      ],
+      "@az-testing-workshop/shared/util/mock-data": [
+        "libs/shared/util/mock-data/src/index.ts"
+      ],
+      "@az-testing-workshop/shared/util/test-harnesses": [
+        "libs/shared/util/test-harnesses/src/index.ts"
+      ],
+      "@az-testing-workshop/shared/util/test-helpers": [
+        "libs/shared/util/test-helpers/src/index.ts"
+      ],
+      "@az-testing-workshop/shared/util/test-helpers/jest": [
+        "libs/shared/util/test-helpers/jest/src/index.ts"
       ]
     }
   },

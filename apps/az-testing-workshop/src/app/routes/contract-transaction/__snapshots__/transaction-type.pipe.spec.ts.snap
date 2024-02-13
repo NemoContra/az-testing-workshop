@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransactionTypePipe with spectator should render the transactionType for "AenderungNachname" 1`] = `
+<lib-ngneat-host-component>
+  <span>
+    Änderung des Nachnamen
+  </span>
+</lib-ngneat-host-component>
+`;
+
+exports[`TransactionTypePipe with spectator should render the transactionType for "Kuendigung" 1`] = `
+<lib-ngneat-host-component>
+  <span>
+    Vertragskündigung
+  </span>
+</lib-ngneat-host-component>
+`;

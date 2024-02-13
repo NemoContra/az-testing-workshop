@@ -93,10 +93,25 @@
         "jestConfig": "apps/az-testing-workshop/jest.config.ts"
       }
     },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
       "options": {
-        "buildTarget": "az-testing-workshop:build"
+        "cypressConfig": "apps/az-testing-workshop/cypress.config.ts",
+        "testingType": "e2e",
+        "browser": "chrome",
+        "devServerTarget": "az-testing-workshop:serve",
+        "baseUrl": "http://localhost:4200"
+      },
+      "configurations": {}
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/az-testing-workshop/cypress.config.ts",
+        "testingType": "component",
+        "browser": "chrome",
+        "skipServe": true,
+        "devServerTarget": "az-testing-workshop:build"
       }
     }
   }

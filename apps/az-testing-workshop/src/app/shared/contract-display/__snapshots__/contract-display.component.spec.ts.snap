@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContractDisplayComponent should show the fields of an empty contract if no contract is provided 1`] = `
+<contract-display
+  contract={[Function Object]}
+>
+  <div
+    class="two-col-grid"
+  >
+  </div>
+</contract-display>
+`;

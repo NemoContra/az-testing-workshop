@@ -24,7 +24,7 @@ export const ContractDetailsStore = signalStore(
   withMethods((store, contractService = inject(ContractService)) => ({
     getContract: rxMethod<string>(
       pipe(
-        tap(() => patchState(store, { loading: false })),
+        tap(() => patchState(store, { loading: true })),
         switchMap((id: string) =>
           contractService.getContract(id).pipe(
             tapResponse({
@@ -39,3 +39,5 @@ export const ContractDetailsStore = signalStore(
     ),
   }))
 );
+
+export type ContractDetailsStore = InstanceType<typeof ContractDetailsStore>;

@@ -6,5 +6,12 @@
   },
   "files": ["src/main.ts"],
   "include": ["src/**/*.d.ts"],
-  "exclude": ["jest.config.ts", "src/**/*.test.ts", "src/**/*.spec.ts"]
+  "exclude": [
+    "jest.config.ts",
+    "src/**/*.test.ts",
+    "../**/*.cy.ts",
+    "cypress/**/*",
+    "cypress.config.ts",
+    "src/**/*.spec.ts"
+  ]
 }

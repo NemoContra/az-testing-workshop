@@ -1,0 +1,291 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContractTransactionComponent should render in loading store 1`] = `
+<contract-transaction
+  messageToastService={[Function _NxMessageToastService]}
+  router={[Function _Router]}
+  store={[Function Object]}
+  transactionTypes={[Function Array]}
+>
+  <nx-link
+    class="nx-link nx-link--small"
+    routerlink="/"
+    tabindex="0"
+  >
+    <nx-icon
+      class="nx-link__icon"
+      name="chevron-left"
+    />
+    Zurück
+  </nx-link><div
+    class="spinner-outlet"
+  >
+  </div>
+</contract-transaction>
+`;
+
+exports[`ContractTransactionComponent should render with a contract and with transactionType "Vertragskündigung" 1`] = `
+<contract-transaction
+  messageToastService={[Function _NxMessageToastService]}
+  router={[Function _Router]}
+  store={[Function Object]}
+  transactionTypes={[Function Array]}
+>
+  <nx-link
+    class="nx-link nx-link--small"
+    routerlink="/"
+    tabindex="0"
+  >
+    <nx-icon
+      class="nx-link__icon"
+      name="chevron-left"
+    />
+    Zurück
+  </nx-link><div
+    class="spinner-outlet"
+  >
+  </div><div
+    class="content"
+  >
+    <contract-display />
+    <div>
+      <nx-formfield
+        class="nx-formfield--type-nx-dropdown nx-formfield is-floating"
+        label="Transaktion wählen"
+      >
+        <div
+          class="nx-formfield__wrapper"
+        >
+          <div
+            class="nx-formfield__row"
+          >
+            <div
+              class="nx-formfield__flexfield"
+            >
+              <div
+                class="nx-formfield__input-container"
+              >
+                <div
+                  class="nx-formfield__input"
+                >
+                  <span
+                    class="nx-formfield__label-holder"
+                  >
+                    <label
+                      aria-owns="nx-dropdown-rendered-2"
+                      class="nx-formfield__label"
+                      for="nx-dropdown-rendered-2"
+                      id="nx-formfield-label-1"
+                    >
+                      <span>
+                        Transaktion wählen
+                      </span>
+                    </label>
+                  </span>
+                  <nx-dropdown
+                    aria-controls="nx-dropdown-modal-3"
+                    aria-disabled="false"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-invalid="false"
+                    aria-labelledby="nx-formfield-label-1"
+                    aria-required="false"
+                    class="nx-dropdown"
+                    placeholder="Bitte wählen"
+                    role="combobox"
+                    tabindex="0"
+                  >
+                    <div
+                      cdkoverlayorigin=""
+                      class="nx-dropdown__container"
+                    >
+                      <div
+                        class="nx-dropdown__rendered"
+                        id="nx-dropdown-rendered-2"
+                      >
+                        <span>
+                          Bitte wählen
+                        </span>
+                      </div>
+                      <div
+                        class="nx-dropdown__icon"
+                      >
+                        <nx-icon
+                          class="nx-dropdown__chevron nx-icon--auto"
+                          data-nx-icon-name="chevron-down"
+                          name="chevron-down"
+                        >
+                          <svg
+                            fill="none"
+                            height="1em"
+                            viewBox="0 0 24 24"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </nx-icon>
+                      </div>
+                    </div>
+                  </nx-dropdown>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nx-formfield>
+    </div>
+    <div>
+    </div>
+  </div>
+</contract-transaction>
+`;
+
+exports[`ContractTransactionComponent should render with a contract without transactionType 1`] = `
+<contract-transaction
+  messageToastService={[Function _NxMessageToastService]}
+  router={[Function _Router]}
+  store={[Function Object]}
+  transactionTypes={[Function Array]}
+>
+  <nx-link
+    class="nx-link nx-link--small"
+    routerlink="/"
+    tabindex="0"
+  >
+    <nx-icon
+      class="nx-link__icon"
+      name="chevron-left"
+    />
+    Zurück
+  </nx-link><div
+    class="spinner-outlet"
+  >
+  </div><div
+    class="content"
+  >
+    <contract-display />
+    <div>
+      <nx-formfield
+        class="nx-formfield--type-nx-dropdown nx-formfield is-floating"
+        label="Transaktion wählen"
+      >
+        <div
+          class="nx-formfield__wrapper"
+        >
+          <div
+            class="nx-formfield__row"
+          >
+            <div
+              class="nx-formfield__flexfield"
+            >
+              <div
+                class="nx-formfield__input-container"
+              >
+                <div
+                  class="nx-formfield__input"
+                >
+                  <span
+                    class="nx-formfield__label-holder"
+                  >
+                    <label
+                      aria-owns="nx-dropdown-rendered-0"
+                      class="nx-formfield__label"
+                      for="nx-dropdown-rendered-0"
+                      id="nx-formfield-label-0"
+                    >
+                      <span>
+                        Transaktion wählen
+                      </span>
+                    </label>
+                  </span>
+                  <nx-dropdown
+                    aria-controls="nx-dropdown-modal-1"
+                    aria-disabled="false"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-invalid="false"
+                    aria-labelledby="nx-formfield-label-0"
+                    aria-required="false"
+                    class="nx-dropdown"
+                    placeholder="Bitte wählen"
+                    role="combobox"
+                    tabindex="0"
+                  >
+                    <div
+                      cdkoverlayorigin=""
+                      class="nx-dropdown__container"
+                    >
+                      <div
+                        class="nx-dropdown__rendered"
+                        id="nx-dropdown-rendered-0"
+                      >
+                        <span>
+                          Bitte wählen
+                        </span>
+                      </div>
+                      <div
+                        class="nx-dropdown__icon"
+                      >
+                        <nx-icon
+                          class="nx-dropdown__chevron nx-icon--auto"
+                          data-nx-icon-name="chevron-down"
+                          name="chevron-down"
+                        >
+                          <svg
+                            fill="none"
+                            height="1em"
+                            viewBox="0 0 24 24"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </nx-icon>
+                      </div>
+                    </div>
+                  </nx-dropdown>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nx-formfield>
+    </div>
+    <div>
+    </div>
+  </div>
+</contract-transaction>
+`;
+
+exports[`ContractTransactionComponent should render with error 1`] = `
+<contract-transaction
+  messageToastService={[Function _NxMessageToastService]}
+  router={[Function _Router]}
+  store={[Function Object]}
+  transactionTypes={[Function Array]}
+>
+  <nx-link
+    class="nx-link nx-link--small"
+    routerlink="/"
+    tabindex="0"
+  >
+    <nx-icon
+      class="nx-link__icon"
+      name="chevron-left"
+    />
+    Zurück
+  </nx-link><nx-error>
+    An error occurred
+  </nx-error><div
+    class="spinner-outlet"
+  >
+  </div>
+</contract-transaction>
+`;

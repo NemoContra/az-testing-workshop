@@ -4,7 +4,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     loadComponent: () =>
-      import('./routes/contraxt-overview/contract-overview.component'),
+      import('./routes/contract-overview/contract-overview.component'),
   },
   {
     path: 'details/:id',
