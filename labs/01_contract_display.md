@@ -1,9 +1,5 @@
 # ContractDisplayComponent
 
-## Notes
-
-This repository contains two application inside the `apps directory`. An Angular app (az-testing-workshop) and a a Nest.js app which acts as a mock-backend. For this workshop we wil focus on the Angular app only.
-
 1. Check out the branch `start`.
 
 ```console
