@@ -6,7 +6,7 @@
 git checkout start
 ```
 
-1. Open the folder `apps/az-testing-workshop/src/app/components/contract-display`.
+1. Open the folder `apps/az-testing-workshop/src/app/shared/contract-display`.
 
 1. Here you will find the ContractDisplayComponent. A small component with only one input value.
 
