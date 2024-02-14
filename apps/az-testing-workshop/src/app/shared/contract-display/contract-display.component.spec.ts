@@ -89,7 +89,7 @@ describe('ContractDisplayComponent', () => {
     );
   });
 
-  it('should show the fields of an empty contract if no contract is provided', () => {
+  it('should show no fields if no contract is provided', () => {
     const spectator = createComponent();
 
     spectator.detectChanges();
