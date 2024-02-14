@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   inject,
   Input,
@@ -34,10 +33,8 @@ import { ContractDisplayComponent } from '../../shared/contract-display/contract
   templateUrl: './contract-details.component.html',
 })
 export default class ContractDetailsComponent {
-  private readonly cdr = inject(ChangeDetectorRef);
   @Input() set id(id: string) {
     this.store.getContract(id);
-    this.cdr.detectChanges();
   }
 
   store: ContractDetailsStore = inject(ContractDetailsStore);
