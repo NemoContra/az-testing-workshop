@@ -9,7 +9,7 @@
   </nx-data-display>
   } @if (contract.end) {
   <nx-data-display label="Vertragsende"
-    >{{ contract.end ? (contract.end | date) : '-' }}
+    >{{ contract.end | date }}
   </nx-data-display>
   } @if (contract.person.firstname) {
   <nx-data-display label="Vorname"

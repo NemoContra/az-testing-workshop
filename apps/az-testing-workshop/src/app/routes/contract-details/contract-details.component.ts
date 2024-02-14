@@ -37,5 +37,5 @@ export default class ContractDetailsComponent {
     this.store.getContract(id);
   }
 
-  store: ContractDetailsStore = inject(ContractDetailsStore);
+  store = inject(ContractDetailsStore);
 }

@@ -41,6 +41,7 @@ describe('ContractService', () => {
 
       expect(spyObserver.next).toHaveBeenCalledTimes(1);
       expect(spyObserver.next).toHaveBeenCalledWith(mockContracts);
+      expect(spyObserver.complete).toHaveBeenCalledTimes(1);
     });
 
     it('should call the api with query and return successfully', () => {
@@ -55,6 +56,7 @@ describe('ContractService', () => {
 
       expect(spyObserver.next).toHaveBeenCalledTimes(1);
       expect(spyObserver.next).toHaveBeenCalledWith(mockContracts);
+      expect(spyObserver.complete).toHaveBeenCalledTimes(1);
     });
 
     it('should call the api and return with an error', () => {
@@ -73,6 +75,7 @@ describe('ContractService', () => {
         }
       );
 
+      expect(spyObserver.next).not.toHaveBeenCalled();
       expect(spyObserver.error).toHaveBeenCalledTimes(1);
       expect(spyObserver.error).toHaveBeenCalledWith(
         new HttpErrorResponse({
@@ -116,6 +119,7 @@ describe('ContractService', () => {
         }
       );
 
+      expect(spyObserver.next).not.toHaveBeenCalled();
       expect(spyObserver.error).toHaveBeenCalledTimes(1);
       expect(spyObserver.error).toHaveBeenCalledWith(
         new HttpErrorResponse({
@@ -137,8 +141,10 @@ describe('ContractService', () => {
         method: 'PUT',
         url: '/api/contracts',
       });
+
       testRequest.flush(mockContracts[0]);
 
+      expect(testRequest.request.body).toEqual(mockContracts[0]);
       expect(spyObserver.next).toHaveBeenCalledTimes(1);
       expect(spyObserver.next).toHaveBeenCalledWith(mockContracts[0]);
     });
@@ -159,6 +165,8 @@ describe('ContractService', () => {
         }
       );
 
+      expect(testRequest.request.body).toEqual(mockContracts[0]);
+      expect(spyObserver.next).not.toHaveBeenCalled();
       expect(spyObserver.error).toHaveBeenCalledTimes(1);
       expect(spyObserver.error).toHaveBeenCalledWith(
         new HttpErrorResponse({
