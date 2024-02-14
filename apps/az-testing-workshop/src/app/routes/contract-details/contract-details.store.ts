@@ -39,5 +39,3 @@ export const ContractDetailsStore = signalStore(
     ),
   }))
 );
-
-export type ContractDetailsStore = InstanceType<typeof ContractDetailsStore>;
