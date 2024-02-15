@@ -16,11 +16,13 @@ import { NxErrorModule } from '@aposin/ng-aquila/base';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { mockComponent } from '@az-testing-workshop/shared/util/test-helpers';
 
+import { of } from 'rxjs';
+
 jest.mock('@aposin/ng-aquila/message', () => ({
   ...jest.requireActual('@aposin/ng-aquila/message'),
   NxMessageToastService: class _NxMessageToastService {
     open = jest.fn(() => ({
-      afterDismissed: jest.fn(() => jest.requireActual('rxjs').of(null)),
+      afterDismissed: jest.fn(() => of(null)),
     }));
   },
 }));
@@ -123,6 +125,9 @@ describe('ContractTransactionComponent', () => {
     expect(spectator.fixture).toMatchSnapshot();
 
     expect(store.selectTransaction).toHaveBeenCalledTimes(1);
+    expect(store.selectTransaction).toHaveBeenCalledWith(
+      'Kuendigung' satisfies TransactionsType
+    );
     expect(spectator.query(ContractDisplayComponent)?.contract).toEqual(
       mockContracts[0]
     );
@@ -230,7 +235,30 @@ describe('ContractTransactionComponent', () => {
     store.transactionType.set('Kuendigung');
     spectator.detectChanges();
 
+    expect(
+      spectator.query<HTMLButtonElement>('button[type="submit"]')?.disabled
+    ).toBe(false);
+
     spectator.click('button[type="submit"]');
+
+    store.contract.set({
+      contractNumber: '1/2345678/9',
+      id: '123456789',
+      person: {
+        dateOfBirth: '1961-05-16',
+        firstname: 'Homer',
+        lastname: 'Simpson',
+      },
+      premium: 42.42,
+      start: '2024-01-01',
+      end: '2024-01-01',
+    });
+
+    spectator.detectChanges();
+
+    expect(
+      spectator.query<HTMLButtonElement>('button[type="submit"]')?.disabled
+    ).toBe(true);
 
     expect(store.updateContract).toHaveBeenCalledTimes(1);
     expect(store.updateContract).toHaveBeenCalledWith({
@@ -264,6 +292,9 @@ describe('ContractTransactionComponent', () => {
     store.transactionType.set('Kuendigung');
     spectator.detectChanges();
 
+    expect(
+      spectator.query<HTMLButtonElement>('button[type="submit"]')?.disabled
+    ).toBe(true);
     expect(spectator.query('nx-error.cancel-error')).toMatchInlineSnapshot(`
       <nx-error
         class="cancel-error"

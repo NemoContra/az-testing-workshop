@@ -71,7 +71,9 @@ describe('ContractTransactionStore', () => {
 
   it('should getContract successfully', () => {
     const contract$ = new AsyncSubject<Contract>();
-    spectator.inject(ContractService).getContract.mockReturnValue(contract$);
+    spectator
+      .inject(ContractService)
+      .getContract.mockReturnValue(contract$.asObservable());
     spectator.service.getContract('123456789');
 
     expect(spectator.service.loading()).toEqual(true);
@@ -88,7 +90,9 @@ describe('ContractTransactionStore', () => {
 
   it('should getContract with an error', () => {
     const contract$ = new AsyncSubject<Contract>();
-    spectator.inject(ContractService).getContract.mockReturnValue(contract$);
+    spectator
+      .inject(ContractService)
+      .getContract.mockReturnValue(contract$.asObservable());
     spectator.service.getContract('123456789');
 
     expect(spectator.service.loading()).toEqual(true);
@@ -109,7 +113,7 @@ describe('ContractTransactionStore', () => {
     const contractService = spectator.inject(ContractService);
     const contractOverviewStore = spectator.inject(ContractOverviewStore);
 
-    contractService.updateContract.mockReturnValue(contract$);
+    contractService.updateContract.mockReturnValue(contract$.asObservable());
 
     spectator.service.updateContract(mockUpdatedContract);
 
@@ -139,7 +143,7 @@ describe('ContractTransactionStore', () => {
     const contractService = spectator.inject(ContractService);
     const contractOverviewStore = spectator.inject(ContractOverviewStore);
 
-    contractService.updateContract.mockReturnValue(contract$);
+    contractService.updateContract.mockReturnValue(contract$.asObservable());
 
     spectator.service.updateContract(mockUpdatedContract);
 

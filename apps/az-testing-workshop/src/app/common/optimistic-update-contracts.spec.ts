@@ -33,4 +33,13 @@ describe('optimisticUpdateContracts', () => {
       },
     ]);
   });
+
+  it('should return undefined if it is called with undefined contracts', () => {
+    expect(
+      optimisticUpdateContracts(undefined, {
+        ...mockContracts[0],
+        contractNumber: '000',
+      })
+    ).toEqual(undefined);
+  });
 });
