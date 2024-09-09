@@ -8,7 +8,6 @@ import { inject } from '@angular/core';
 import { TransactionsType } from '../../common/transaction-type';
 import { ContractService } from '../../services/contract.service';
 import { ContractOverviewStore } from '../contract-overview/contract-overview.store';
-import { optimisticUpdateContracts } from '../../common/optimistic-update-contracts';
 
 export type ContractTransactionState = {
   contract: Contract | undefined;
@@ -57,12 +56,7 @@ export const ContractTransactionStore = signalStore(
               tapResponse({
                 next: (contract) => {
                   patchState(store, { contract });
-                  patchState(contractOverviewStore, {
-                    contracts: optimisticUpdateContracts(
-                      contractOverviewStore.contracts(),
-                      contract
-                    ),
-                  });
+                  contractOverviewStore.updateContracts(contract);
                 },
                 error: ({ status }: HttpErrorResponse) =>
                   patchState(store, { errorCode: status }),

@@ -50,7 +50,7 @@ exports[`ContractTransactionComponent should render with a contract and with tra
     <contract-display />
     <div>
       <nx-formfield
-        class="nx-formfield--type-nx-dropdown nx-formfield is-floating"
+        class="nx-formfield--type-nx-dropdown nx-formfield is-floating is-auto-floating"
         label="Transaktion wählen"
       >
         <div
@@ -98,6 +98,7 @@ exports[`ContractTransactionComponent should render with a contract and with tra
                     <div
                       cdkoverlayorigin=""
                       class="nx-dropdown__container"
+                      style="user-select: none; webkit-user-select: none;"
                     >
                       <div
                         class="nx-dropdown__rendered"
@@ -111,6 +112,7 @@ exports[`ContractTransactionComponent should render with a contract and with tra
                         class="nx-dropdown__icon"
                       >
                         <nx-icon
+                          aria-hidden="true"
                           class="nx-dropdown__chevron nx-icon--auto"
                           data-nx-icon-name="chevron-down"
                           name="chevron-down"
@@ -170,7 +172,7 @@ exports[`ContractTransactionComponent should render with a contract without tran
     <contract-display />
     <div>
       <nx-formfield
-        class="nx-formfield--type-nx-dropdown nx-formfield is-floating"
+        class="nx-formfield--type-nx-dropdown nx-formfield is-floating is-auto-floating"
         label="Transaktion wählen"
       >
         <div
@@ -218,6 +220,7 @@ exports[`ContractTransactionComponent should render with a contract without tran
                     <div
                       cdkoverlayorigin=""
                       class="nx-dropdown__container"
+                      style="user-select: none; webkit-user-select: none;"
                     >
                       <div
                         class="nx-dropdown__rendered"
@@ -231,6 +234,7 @@ exports[`ContractTransactionComponent should render with a contract without tran
                         class="nx-dropdown__icon"
                       >
                         <nx-icon
+                          aria-hidden="true"
                           class="nx-dropdown__chevron nx-icon--auto"
                           data-nx-icon-name="chevron-down"
                           name="chevron-down"
