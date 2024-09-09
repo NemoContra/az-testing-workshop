@@ -7,7 +7,7 @@ import { Contract } from '@az-testing-workshop/shared/util/api-models';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { optimisticUpdateContracts } from '../../common/optimistic-update-contracts';
 import { ContractOverviewStore } from '../contract-overview/contract-overview.store';
-import { patchState, signalState } from '@ngrx/signals';
+import { signalState } from '@ngrx/signals';
 
 const mockUpdatedContract: Contract = {
   ...mockContracts[0],
@@ -27,10 +27,6 @@ jest.mock('@ngrx/signals', () => {
   const { patchState, ...module } = jest.requireActual('@ngrx/signals');
   return { ...module, patchState: jest.fn(patchState) };
 });
-
-jest.mock('../../common/optimistic-update-contracts', () => ({
-  optimisticUpdateContracts: jest.fn(() => mockUpdatedContracts),
-}));
 
 describe('ContractTransactionStore', () => {
   let spectator: SpectatorService<

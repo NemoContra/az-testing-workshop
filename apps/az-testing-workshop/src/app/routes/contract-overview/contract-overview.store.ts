@@ -12,6 +12,7 @@ import { inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { tapResponse } from '@ngrx/operators';
 import { ContractService } from '../../services/contract.service';
+import { optimisticUpdateContracts } from '../../common/optimistic-update-contracts';
 
 export type ContractOverviewState = {
   contracts: Contract[] | undefined;
@@ -47,6 +48,11 @@ export const ContractOverviewStore = signalStore(
         )
       )
     ),
+    updateContracts: (contract: Contract) => {
+      patchState(store, {
+        contracts: optimisticUpdateContracts(store.contracts(), contract),
+      });
+    },
   })),
   withHooks(({ getContracts, query }) => ({
     onInit: () => {
