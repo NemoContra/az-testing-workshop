@@ -5,9 +5,9 @@ import { AsyncSubject, of } from 'rxjs';
 import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { optimisticUpdateContracts } from '../../common/optimistic-update-contracts';
 import { ContractOverviewStore } from '../contract-overview/contract-overview.store';
 import { patchState, signalState } from '@ngrx/signals';
+import { signal } from '@angular/core';
 
 const mockUpdatedContract: Contract = {
   ...mockContracts[0],
@@ -27,10 +27,6 @@ jest.mock('@ngrx/signals', () => {
   const { patchState, ...module } = jest.requireActual('@ngrx/signals');
   return { ...module, patchState: jest.fn(patchState) };
 });
-
-jest.mock('../../common/optimistic-update-contracts', () => ({
-  optimisticUpdateContracts: jest.fn(() => mockUpdatedContracts),
-}));
 
 describe('ContractTransactionStore', () => {
   let spectator: SpectatorService<
@@ -113,6 +109,10 @@ describe('ContractTransactionStore', () => {
     const contractService = spectator.inject(ContractService);
     const contractOverviewStore = spectator.inject(ContractOverviewStore);
 
+    Object.assign(contractOverviewStore, {
+      updateContracts: jest.fn(),
+    });
+
     contractService.updateContract.mockReturnValue(contract$.asObservable());
 
     spectator.service.updateContract(mockUpdatedContract);
@@ -124,24 +124,25 @@ describe('ContractTransactionStore', () => {
     contract$.next(mockUpdatedContract);
     contract$.complete();
 
-    expect(optimisticUpdateContracts).toHaveBeenCalledTimes(1);
-    expect(optimisticUpdateContracts).toHaveBeenCalledWith(
-      mockContracts,
+    expect(contractOverviewStore.updateContracts).toHaveBeenCalledTimes(1);
+    expect(contractOverviewStore.updateContracts).toHaveBeenNthCalledWith(
+      1,
       mockUpdatedContract
     );
-
-    expect(patchState).toMatchSnapshot();
 
     expect(spectator.service.loading()).toEqual(false);
     expect(spectator.service.errorCode()).toEqual(undefined);
     expect(spectator.service.contract()).toEqual(mockUpdatedContract);
-    expect(contractOverviewStore.contracts()).toEqual(mockUpdatedContracts);
   });
 
   it('should updateContract with an error', () => {
     const contract$ = new AsyncSubject<Contract>();
     const contractService = spectator.inject(ContractService);
     const contractOverviewStore = spectator.inject(ContractOverviewStore);
+
+    Object.assign(contractOverviewStore, {
+      updateContracts: jest.fn(),
+    });
 
     contractService.updateContract.mockReturnValue(contract$.asObservable());
 
@@ -155,7 +156,7 @@ describe('ContractTransactionStore', () => {
       new HttpErrorResponse({ status: HttpStatusCode.InternalServerError })
     );
 
-    expect(optimisticUpdateContracts).not.toHaveBeenCalled();
+    expect(contractOverviewStore.updateContracts).not.toHaveBeenCalled();
 
     expect(patchState).toHaveBeenCalledTimes(3);
     expect(patchState).toHaveBeenNthCalledWith(1, expect.anything(), {
