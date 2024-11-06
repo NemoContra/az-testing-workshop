@@ -2,10 +2,12 @@
 
 exports[`ContractTransactionComponent should render in loading store 1`] = `
 <contract-transaction
+  id={[Function Function]}
   messageToastService={[Function _NxMessageToastService]}
   router={[Function _Router]}
   store={[Function Object]}
   transactionTypes={[Function Array]}
+  transaktion={[Function Function]}
 >
   <nx-link
     class="nx-link nx-link--small"
@@ -26,10 +28,12 @@ exports[`ContractTransactionComponent should render in loading store 1`] = `
 
 exports[`ContractTransactionComponent should render with a contract and with transactionType "Vertragskündigung" 1`] = `
 <contract-transaction
+  id={[Function Function]}
   messageToastService={[Function _NxMessageToastService]}
   router={[Function _Router]}
   store={[Function Object]}
   transactionTypes={[Function Array]}
+  transaktion={[Function Function]}
 >
   <nx-link
     class="nx-link nx-link--small"
@@ -148,10 +152,12 @@ exports[`ContractTransactionComponent should render with a contract and with tra
 
 exports[`ContractTransactionComponent should render with a contract without transactionType 1`] = `
 <contract-transaction
+  id={[Function Function]}
   messageToastService={[Function _NxMessageToastService]}
   router={[Function _Router]}
   store={[Function Object]}
   transactionTypes={[Function Array]}
+  transaktion={[Function Function]}
 >
   <nx-link
     class="nx-link nx-link--small"
@@ -270,10 +276,12 @@ exports[`ContractTransactionComponent should render with a contract without tran
 
 exports[`ContractTransactionComponent should render with error 1`] = `
 <contract-transaction
+  id={[Function Function]}
   messageToastService={[Function _NxMessageToastService]}
   router={[Function _Router]}
   store={[Function Object]}
   transactionTypes={[Function Array]}
+  transaktion={[Function Function]}
 >
   <nx-link
     class="nx-link nx-link--small"

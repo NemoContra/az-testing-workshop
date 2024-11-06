@@ -1,6 +1,5 @@
 import { createComponentFactory } from '@ngneat/spectator/jest';
 import { ContractDisplayComponent } from './contract-display.component';
-import { NxDataDisplayComponent } from '@aposin/ng-aquila/data-display';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { LOCALE_ID } from '@angular/core';
@@ -87,17 +86,5 @@ describe('ContractDisplayComponent', () => {
     expect(await nxDataDisplayHarnesses[5].getValue()).toMatchInlineSnapshot(
       `"16.05.1961"`
     );
-  });
-
-  it('should show no fields if no contract is provided', () => {
-    const spectator = createComponent();
-
-    spectator.detectChanges();
-
-    expect(spectator.fixture).toMatchSnapshot();
-
-    const dataDisplays = spectator.queryAll(NxDataDisplayComponent);
-
-    expect(dataDisplays.length).toEqual(0);
   });
 });

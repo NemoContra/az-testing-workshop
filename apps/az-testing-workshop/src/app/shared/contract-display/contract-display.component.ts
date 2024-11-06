@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Contract } from '@az-testing-workshop/shared/util/api-models';
 import { NxDataDisplayModule } from '@aposin/ng-aquila/data-display';
 import { DatePipe } from '@angular/common';
-import { emptyContract } from '../../common/empty-contract';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,5 +12,5 @@ import { emptyContract } from '../../common/empty-contract';
   imports: [NxDataDisplayModule, DatePipe],
 })
 export class ContractDisplayComponent {
-  @Input({ required: true }) contract: Contract = emptyContract;
+  contract = input.required<Contract>();
 }

@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Input,
+  input,
 } from '@angular/core';
 import { ContractTransactionStore } from './contract-transaction.store';
 import { NxDropdownModule } from '@aposin/ng-aquila/dropdown';
@@ -24,6 +24,7 @@ import { DatePipe } from '@angular/common';
 import { NxMessageToastService } from '@aposin/ng-aquila/message';
 import { ContractDisplayComponent } from '../../shared/contract-display/contract-display.component';
 import { getNowDateString } from '../../common/get-now-date-string';
+import { explicitEffect } from 'ngxtension/explicit-effect';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,15 +48,15 @@ import { getNowDateString } from '../../common/get-now-date-string';
   templateUrl: './contract-transaction.component.html',
 })
 export default class ContractTransactionComponent {
-  @Input() set id(id: string) {
-    this.store.getContract(id);
-  }
+  id = input<string>();
+  transaktion = input<TransactionsType>();
 
-  @Input() set transaktion(transaktion: TransactionsType | undefined) {
-    if (transaktion) {
-      this.store.selectTransaction(transaktion);
-    }
-  }
+  #idEffect = explicitEffect([this.id, this.transaktion], ([id]) => {
+    if (id) this.store.getContract(id);
+  });
+  #transaktionEffect = explicitEffect([this.transaktion], ([transaktion]) => {
+    if (transaktion) this.store.selectTransaction(transaktion);
+  });
 
   store = inject(ContractTransactionStore);
   readonly transactionTypes = transactionTypes;

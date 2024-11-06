@@ -3,6 +3,7 @@
 exports[`ContractOverviewComponent should render contracts-table 1`] = `
 <contract-overview
   overviewStore={[Function Object]}
+  query={[Function Function]}
   router={[Function Object]}
 >
   <div
@@ -15,6 +16,7 @@ exports[`ContractOverviewComponent should render contracts-table 1`] = `
 exports[`ContractOverviewComponent should render error message 1`] = `
 <contract-overview
   overviewStore={[Function Object]}
+  query={[Function Function]}
   router={[Function Object]}
 >
   <nx-error>
@@ -29,6 +31,7 @@ exports[`ContractOverviewComponent should render error message 1`] = `
 exports[`ContractOverviewComponent should render loading-spinner 1`] = `
 <contract-overview
   overviewStore={[Function Object]}
+  query={[Function Function]}
   router={[Function Object]}
 >
   <div

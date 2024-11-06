@@ -17,7 +17,6 @@ import { NxButtonHarness } from '@aposin/ng-aquila/button/testing';
 import { mockContracts } from '@az-testing-workshop/shared/util/mock-data';
 import { NxInputHarness } from '@az-testing-workshop/shared/util/test-harnesses';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { createSpyObserver } from '@az-testing-workshop/shared/util/test-helpers/jest';
 
 registerLocaleData(localeDe);
 
@@ -218,8 +217,9 @@ describe('ContractTableComponent', () => {
 
     spectator.detectChanges();
 
-    const outputEvent = createSpyObserver();
-    spectator.output('queryChange').subscribe(outputEvent);
+    const outputEvent = jest.fn();
+
+    spectator.component.queryChange.subscribe(outputEvent);
 
     const searchInput = await loader.getHarness(NxInputHarness);
 
@@ -227,22 +227,18 @@ describe('ContractTableComponent', () => {
 
     tick(100);
 
-    expect(outputEvent.next).not.toHaveBeenCalled();
-    expect(outputEvent.error).not.toHaveBeenCalled();
-    expect(outputEvent.complete).not.toHaveBeenCalled();
+    expect(outputEvent).not.toHaveBeenCalled();
 
     tick(100);
 
-    expect(outputEvent.next).toHaveBeenCalledTimes(1);
-    expect(outputEvent.next).toHaveBeenCalledWith('Homer');
-    expect(outputEvent.error).not.toHaveBeenCalled();
-    expect(outputEvent.complete).not.toHaveBeenCalled();
+    expect(outputEvent).toHaveBeenCalledTimes(1);
+    expect(outputEvent).toHaveBeenCalledWith('Homer');
 
     await searchInput.writeValue('Homer');
 
     tick(300);
 
-    expect(outputEvent.next).toHaveBeenCalledTimes(1);
+    expect(outputEvent).toHaveBeenCalledTimes(1);
   }));
 
   const expectCorrectTableRow = (

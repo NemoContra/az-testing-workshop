@@ -1,27 +1,27 @@
 <div class="two-col-grid">
-  @if (contract.contractNumber) {
+  @if (contract().contractNumber) {
   <nx-data-display label="Vertragsnummer"
-    >{{ contract.contractNumber }}
+    >{{ contract().contractNumber }}
   </nx-data-display>
-  } @if (contract.start) {
+  } @if (contract().start) {
   <nx-data-display label="Vertragsbeginn"
-    >{{ contract.start | date }}
+    >{{ contract().start | date }}
   </nx-data-display>
-  } @if (contract.end) {
+  } @if (contract().end) {
   <nx-data-display label="Vertragsende"
-    >{{ contract.end | date }}
+    >{{ contract().end | date }}
   </nx-data-display>
-  } @if (contract.person.firstname) {
+  } @if (contract().person.firstname) {
   <nx-data-display label="Vorname"
-    >{{ contract.person.firstname }}
+    >{{ contract().person.firstname }}
   </nx-data-display>
-  } @if (contract.person.lastname) {
+  } @if (contract().person.lastname) {
   <nx-data-display label="Nachname"
-    >{{ contract.person.lastname }}
+    >{{ contract().person.lastname }}
   </nx-data-display>
-  } @if (contract.person.dateOfBirth) {
+  } @if (contract().person.dateOfBirth) {
   <nx-data-display label="Geburtsdatum"
-    >{{ contract.person.dateOfBirth | date }}
+    >{{ contract().person.dateOfBirth | date }}
   </nx-data-display>
   }
 </div>

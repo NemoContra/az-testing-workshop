@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (contract of contracts; track contract.id) {
+      @for (contract of contracts(); track contract.id) {
       <tr>
         <td nxTableCell>{{ contract.contractNumber }}</td>
         <td nxTableCell>{{ contract.person.firstname }}</td>

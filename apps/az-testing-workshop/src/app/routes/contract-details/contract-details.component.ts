@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Input,
+  input,
 } from '@angular/core';
 import { NxDataDisplayModule } from '@aposin/ng-aquila/data-display';
 import { ContractDetailsStore } from './contract-details.store';
@@ -13,6 +13,7 @@ import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { RouterLink } from '@angular/router';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { ContractDisplayComponent } from '../../shared/contract-display/contract-display.component';
+import { explicitEffect } from 'ngxtension/explicit-effect';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,9 +34,7 @@ import { ContractDisplayComponent } from '../../shared/contract-display/contract
   templateUrl: './contract-details.component.html',
 })
 export default class ContractDetailsComponent {
-  @Input() set id(id: string) {
-    this.store.getContract(id);
-  }
-
+  id = input.required<string>();
+  #idEffect = explicitEffect([this.id], ([id]) => this.store.getContract(id));
   store = inject(ContractDetailsStore);
 }
