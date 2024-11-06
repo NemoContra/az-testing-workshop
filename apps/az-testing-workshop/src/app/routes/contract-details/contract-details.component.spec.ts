@@ -57,20 +57,17 @@ describe('ContractDetailsComponent', () => {
         },
       ],
     ],
+    detectChanges: false,
   });
 
   it('should render content with contract-display component if contractService is returning data successfully', () => {
-    spectator = createComponent({
-      props: {
-        id: '123456789',
-      },
-    });
+    spectator = createComponent();
+
+    spectator.setInput('id', '123456789');
 
     expect(spectator.inject(ContractService).getContract).toHaveBeenCalledWith(
       '123456789'
     );
-
-    spectator.detectChanges();
 
     expect(spectator.query(NxSpinnerComponent)).toBeNull();
     expect(spectator.query(NxErrorComponent)).toBeNull();
@@ -81,15 +78,11 @@ describe('ContractDetailsComponent', () => {
   });
 
   it('should show a loading spinner if data is loading', () => {
-    spectator = createComponent({
-      props: {
-        id: '123456789',
-      },
-    });
+    spectator = createComponent();
 
     spectator.inject(ContractService).getContract.mockReturnValue(NEVER);
 
-    spectator.detectChanges();
+    spectator.setInput('id', '123456789');
 
     expect(spectator.inject(ContractService).getContract).toHaveBeenCalledWith(
       '123456789'
@@ -102,17 +95,13 @@ describe('ContractDetailsComponent', () => {
   });
 
   it('should show an error if contractService is returning an error ', () => {
-    spectator = createComponent({
-      props: {
-        id: '123456789',
-      },
-    });
+    spectator = createComponent();
 
     spectator
       .inject(ContractService)
       .getContract.mockReturnValue(throwError(() => ({ status: 500 })));
 
-    spectator.detectChanges();
+    spectator.setInput('id', '123456789');
 
     expect(spectator.inject(ContractService).getContract).toHaveBeenCalledWith(
       '123456789'
